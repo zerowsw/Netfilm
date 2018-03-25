@@ -40,7 +40,20 @@
 
 </script>
 
+<button id = "delete">delete</button>
+<script type="text/javascript">
+	$("#delete").click(()=>{
+		let data = {
+			"email" : "hongting@qq.com",
+			"pw" : "hahahaha"
+		};
+		let url = "http://127.0.0.1:8000/delete/";
+		$.get(url,data,(response)=>{
+			alert(response);
+		});		
+	});
 
+</script>
 
 </body>
 </html>

@@ -15,6 +15,13 @@ def deletefriend():
 def changepw(request):
 	pass
 
+def delete(request):
+	email = request.GET.get("email","")
+	pw = request.GET.get("pw","")	
+	if email and pw:
+		from application.models import user
+		user.objects.filter(email = email).delete()
+		return HttpResponse("true")
 
 def register(request):
 	email = request.GET.get("email","")
@@ -27,15 +34,15 @@ def register(request):
 		return HttpResponse("true")
 
 def login(request):
-    email = request.GET.get('email',"")
-    pw = request.GET.get('pw',"")
-    if email and pw:
-    	from application.models import user
-    	res = user.objects.filter(email = email)
-    	if res and len(res):
-    		return HttpResponse("true")
-    	else:
-    		return HttpResponse("false")
+	email = request.GET.get('email',"")
+	pw = request.GET.get('pw',"")
+	if email and pw:
+		from application.models import user
+		res = user.objects.filter(email = email)
+		if res and len(res):
+			return HttpResponse("true")
+		else:
+			return HttpResponse("false")
 
 
 def index(request):
