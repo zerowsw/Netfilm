@@ -22,3 +22,6 @@ def login(request):
     	else:
     		return HttpResponse("false")
 
+    		
+def index(request):
+	return render(request,'index.html')
