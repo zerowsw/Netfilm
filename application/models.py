@@ -2,7 +2,7 @@
 #coding:utf-8
  
 from django.db import models
- 
+
 class movie(models.Model):
     budget = models.IntegerField(null = True,blank=True)#,blank=True
     id = models.IntegerField(primary_key=True)
