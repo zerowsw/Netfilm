@@ -1,6 +1,21 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
 # Create your views here.
+
+
+def searchmovie():
+	pass
+
+def addfriend():
+	pass
+
+def deletefriend():
+	pass
+
+def changepw(request):
+	pass
+
+
 def register(request):
 	email = request.GET.get("email","")
 	pw = request.GET.get("pw","")

@@ -22,24 +22,50 @@ class movie(models.Model):
     #     return self.id
 
 class user(models.Model):
+    #Users (names, email, passwords)
+    name = models.CharField(max_length=30, default="")
+    email = models.EmailField(default="", primary_key=True)
+    pw = models.CharField(max_length = 100, default="")
+
+class tweet(models.Model):
+    #Tweet (message_id, content, timestamp)
+    message_id = models.IntegerField(primary_key=True)
+    content = models.TextField(default="")
+    timestamp = models.DateTimeField(default="")
+
+class comment(models.Model):
+    #Comment (content, timestamp)
+    content = models.TextField(default="")
+    timestamp = models.DateTimeField(primary_key=True)
+
+class rate(models.Model):
+    #Rate (email, title, year, Ratingscores, ratingDate)
     email = models.EmailField(default="")
-    pw = models.CharField(max_length = 100,default="")
+    title = models.CharField(default="", max_length = 30)
+    year = models.IntegerField(null = True,blank=True)
+    ratingscores = models.FloatField(null = True,blank=True)
+    ratingdate = models.DateField(default="")
+    class Meta:
+        unique_together = ("email", "title", "year", "ratingdate")
 
-# class tweet(models.Model):
-#     pass
+class post(models.Model):
+    # Post (email, message_id)
+    email = models.EmailField(default="")
+    message_id = models.IntegerField(default="")
+    class Meta:
+        unique_together = ("email", "message_id")
 
-# class comment(models.Model):
-#     pass
-
-# class rate(models.Model):
-#     pass
-
-# class post(models.Model):
-#     pass
-
-# class recommend(models.Model):
-#     pass
+class recommend(models.Model):
+    #Recommend (email, title, year)
+    email = models.EmailField(default="")
+    title = models.CharField(default="", max_length=30)
+    year = models.IntegerField(null=True, blank=True)
+    class Meta:
+        unique_together = ("email", "title", "year")
 
 class friendship(models.Model):
-    id1 = models.IntegerField()
-    id2 = models.IntegerField()
+    #Frinends (email, email)
+    email1 = models.EmailField(default="")
+    email2 = models.EmailField(default="")
+    class Meta:
+        unique_together = ("email1", "email2")
