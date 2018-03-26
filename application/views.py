@@ -9,8 +9,8 @@ def searchmovie(request):
 	title = request.GET.get("title", "")
 	if title:
 		from application.models import movie
-		qs = list(movie.objects.filter(title_contains=title).values())
-		return JsonResponse(data, safe = False)
+		qs = list(movie.objects.filter(title__contains=title)[0:11].values())
+		return JsonResponse(qs, safe = False)
 	else:
 		return HttpResponse("false")
 
