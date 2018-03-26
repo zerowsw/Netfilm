@@ -1,23 +1,58 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 # Create your views here.
 
 
-def searchmovie():
-	pass
+def searchmovie(request):
+	title = request.GET.get("title", "")
+	if title:
+		from application.models import movie
+		movie.objects.filter(title_contains=title)
+		#movie.objects.get(title=title)
+		return HttpResponse("true")
+	else:
+		return HttpResponse("false")
 
-def addfriend():
-	pass
 
-def deletefriend():
-	pass
+def addfriend(request):
+	e1 = request.GET.get("email1", "")
+	e2 = request.GET.get("email2", "")
+	if e1 and e2:
+		from application.models import friendship
+		friendship.objects.create(email1=e1, email2=e2)
+		return HttpResponse("true")
+	else:
+		return HttpResponse("false")
+
+
+def searchfriend(request):
+	email = 
+
+
+def deletefriend(request):
+	e1 = request.GET.get("email1", "")
+	e2 = request.GET.get("email2", "")
+	if e1 and e2:
+		from application.models import friendship
+		friendship.objects.filter(email1=e1, email2=e2).delete()
+		return HttpResponse("true")
+	else:
+		return HttpResponse("false")
 
 def changepw(request):
-	pass
+	email = request.GET.get("email", "")
+	pw = request.GET.get("pw", "")
+	if email and pw:
+		from application.models import user
+		user.objects.filter(email=email).update(pw=pw)
+		return HttpResponse("true")
+	else:
+		return HttpResponse("false")
 
 def delete(request):
 	email = request.GET.get("email","")
-	pw = request.GET.get("pw","")	
+	pw = request.GET.get("pw","")
 	if email and pw:
 		from application.models import user
 		user.objects.filter(email = email).delete()
