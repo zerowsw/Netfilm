@@ -27,7 +27,8 @@ def addfriend(request):
 
 
 def searchfriend(request):
-	email = 
+	# email = 
+	pass
 
 
 def deletefriend(request):
