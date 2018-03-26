@@ -55,5 +55,18 @@
 
 </script>
 
+<button id = "search">search</button>
+<script type="text/javascript">
+	$("#search").click(()=>{
+		let data = {
+			"name" = "en",
+		};
+		let url = "http://127.0.0.1:8000/search/";
+		$.get(url,data,(response)=>{
+			console.log(response)
+		});		
+	});
+</script>
+
 </body>
 </html>

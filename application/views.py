@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.core import serializers
 # Create your views here.
 
 
@@ -8,9 +9,8 @@ def searchmovie(request):
 	title = request.GET.get("title", "")
 	if title:
 		from application.models import movie
-		movie.objects.filter(title_contains=title)
-		#movie.objects.get(title=title)
-		return HttpResponse("true")
+		qs = list(movie.objects.filter(title_contains=title).values())
+		return JsonResponse(data, safe = False)
 	else:
 		return HttpResponse("false")
 

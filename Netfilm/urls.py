@@ -25,4 +25,5 @@ urlpatterns = [
 	path('login/',app.login), #new 24.15.43
 	path('register/',app.register),
     path('delete/',app.delete),
+    path('search/',app.searchmovie),
 ]

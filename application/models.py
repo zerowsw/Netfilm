@@ -40,13 +40,13 @@ class comment(models.Model):
 
 class rate(models.Model):
     #Rate (email, title, year, Ratingscores, ratingDate)
-    email = models.EmailField(default="")
-    title = models.CharField(default="", max_length = 30)
-    year = models.IntegerField(null = True,blank=True)
-    ratingscores = models.FloatField(null = True,blank=True)
-    ratingdate = models.DateField(default="")
+    userId = models.IntegerField(default=0)
+    movieId = models.IntegerField(default=0)
+    # year = models.IntegerField(null = True,blank=True)
+    rating = models.FloatField(null = True,blank=True)
+    timestamp = models.CharField(max_length = 30,default="")
     class Meta:
-        unique_together = ("email", "title", "year", "ratingdate")
+        unique_together = ("userId", "movieId")
 
 class post(models.Model):
     # Post (email, message_id)
