@@ -24,6 +24,9 @@
 	});
 
 
+
+
+
 </script>
 <button id = "login">login</button>
 <script type="text/javascript">
@@ -57,15 +60,29 @@
 
 <button id = "search">search</button>
 <script type="text/javascript">
-	$("#search").click(()=>{
-		let data = {
-			"title" : "en",
-		};
-		let url = "http://127.0.0.1:8000/search/";
-		$.get(url,data,(response)=>{
-			console.log(response)
-		});		
-	});
+	// $("#search").click(()=>{
+	// 	let data = {
+	// 		"title" : "en",
+	// 	};
+	// 	let url = "http://127.0.0.1:8000/search/";
+	// 	$.get(url,data,(response)=>{
+	// 		console.log(response)
+	// 	});		
+	// });
+	const reg = document.getElementById("search");
+	reg.addEventListener("click",(evt) =>{
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState === 4 && xhr.status === 200){
+				console.log(xhr.responseText);	
+			}else{
+				alert(xhr.statusText);
+			}
+		}
+		xhr.open("GET","http://127.0.0.1:8000/search/?title=en");
+		xhr.send();
+	})
+
 </script>
 
 </body>
