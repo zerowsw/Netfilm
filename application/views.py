@@ -64,13 +64,18 @@ def login(request):
 
 def change_pw(request):
 	email = request.GET.get("email", "")
-	pw = request.GET.get("pw", "")
-	if email and pw:
-		from application.models import user
+	old_pw = request.GET.get("old", "")
+	new_pw1 = request.GET.get("pw1", "")
+	new_pw2 = request.GET.get("pw2", "")
+	if email and old_pw:
+		if(new_pw1 != new_pw2):
+			return HttpResponse("new passwords not match")
+		if(user.objects.filter(email=email)[0].pw != old_pw):
+			return HttpResponse("old passwords incorrect")
 		user.objects.filter(email=email).update(pw=pw)
-		return HttpResponse("true")
+		return HttpResponse("change password success")
 	else:
-		return HttpResponse("false")
+		return HttpResponse("incorrect input")
 
 def delete(request):
 	email = request.GET.get("email","")
