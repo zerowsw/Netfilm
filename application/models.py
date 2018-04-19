@@ -17,7 +17,6 @@ class movie(models.Model):
     video = models.CharField(max_length = 6,null = True,blank=True)
     vote_average = models.FloatField(null = True,blank=True)
     vote_count =  models.IntegerField(null = True,blank=True)
-
     # def __unicode__(self):
     #     return self.id
 
