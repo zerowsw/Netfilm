@@ -34,8 +34,11 @@ class tweet(models.Model):
 
 class comment(models.Model):
     #Comment (content, timestamp)
+    email = models.EmailField(default="")
     content = models.TextField(default="")
-    timestamp = models.DateTimeField(primary_key=True)
+    timestamp = models.DateTimeField(default="")
+    class Meta:
+        unique_together = ("email", "content")    
 
 class rate(models.Model):
     #Rate (email, title, year, Ratingscores, ratingDate)

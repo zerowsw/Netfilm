@@ -86,13 +86,19 @@ def delete(request):
 		return HttpResponse("true")
 
 #user-movie
-def add_favor(request):
+def add_favor(request):    #later
 	pass
 
-def get_favor(request):
+def get_favor(request):		 #later	
 	pass
 
 def get_user_rate_comment(request):
+	email = request.GET.get("email", "")
+	if email:
+		qs = list(movie.objects.filter(title__contains=title)[0:11].values())
+		return JsonResponse(qs, safe = False)
+	else:
+		return HttpResponse("false")	
 	pass
 
 def get_user_watched_movies(request):
