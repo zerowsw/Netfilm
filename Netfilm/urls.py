@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from application import views as app
+# from djangoChat import views as chat
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +27,12 @@ urlpatterns = [
 	path('register/',app.register),
     path('delete/',app.delete),
     path('search/',app.searchmovie),
+    # path('chat/',chat.urls),
+    # url(r'^$', views.index, name='index'),
+    # url(r'^login/$',views.login,name='login'),
+    # url(r'^logout/$',views.logout,name='logout'),
+    # url(r'^api/$',views.chat_api,name='chat_api'),
+    # url(r'^api/users/$',views.logged_chat_users,name='logged_chat_users'),
+    # url(r'^api/users/update/$',views.update_time,name='update_time'),
+    # url(r'^chat/', include('djangoChat.urls')),
 ]
