@@ -13,7 +13,7 @@ class movie(models.Model):
     revenue = models.IntegerField(null = True,blank=True)
     runtime = models.IntegerField(null = True,blank=True)
     status = models.CharField(max_length = 10,null = True,blank=True)
-    title = models.CharField(default="",max_length = 30)
+    title = models.CharField(default="",max_length = 30)                #important field
     video = models.CharField(max_length = 6,null = True,blank=True)
     vote_average = models.FloatField(null = True,blank=True)
     vote_count =  models.IntegerField(null = True,blank=True)

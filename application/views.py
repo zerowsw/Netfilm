@@ -8,15 +8,18 @@ from application.models import *
 
 
 #web
-def index(request):
-	return render(request,'index.html')
+def index(request):				#done
+	return render(request,'index.html')  
 
 #movie
 def search_movie(request):
 	title = request.GET.get("title", "")
 	if title:
-		qs = list(movie.objects.filter(title__contains=title)[0:11].values())
-		return JsonResponse(qs, safe = False)
+		movies = list(movie.objects.filter(title__contains=title).values())
+		if(len(movies)):
+			return JsonResponse(movies, safe = False)
+		else:
+			return HttpResponse("no movies found! Try another keyword")
 	else:
 		return HttpResponse("false")
 
@@ -38,10 +41,13 @@ def get_movie_comment(request):
 def get_movie_info(request):
 	title =  request.GET.get("title", "")
 	if title:
-		qs = list(movie.objects.filter(title=title)[0].values())
-		return JsonResponse(qs, safe = False)
+		res = list(movie.objects.filter(title=title)[0].values())
+		if res:
+			return JsonResponse(res, safe = False)
+		else:
+			return HttpResponse("nothing found")
 	else:
-		return HttpResponse("false")
+		return HttpResponse("invalid input")
 	pass
 
 #user-basic
@@ -56,7 +62,6 @@ def register(request):
 			return HttpResponse("email already taken, please login")
 		if(len(user.objects.filter(name=name))):			
 			return HttpResponse("name already taken, choose another name")
-		# from application.models import user
 		# userid = user.objects.all()
 		user.objects.create(name=name, email = email, pw = pw) #,userid=userid?????????????????
 		return HttpResponse("success, Userid is")
@@ -101,16 +106,28 @@ def delete(request):
 # def get_favor(request):		 #later	
 # 	pass
 
-def get_user_rate_comment(request):
-	# email = request.GET.get("email", "")
-	# if email:
-	# 	comment = list(comment.objects.filter(email=email)[0:11].values())
-	# 	rate = list(comment.objects.filter(email=email)[0:11].values())
-	# 	return JsonResponse(qs, safe = False)
-	# else:
-	# 	return HttpResponse("error")	
-	pass
+def get_user_comment(request):
+	name = request.GET.get("name", "")
+	if name:
+		comments = list(comment.objects.filter(name=name).values())
+		# rate = list(comment.objects.filter(email=email)[0:11].values())
+		if len(comments):
+			return JsonResponse(comments, safe = False)
+		else:
+			return HttpResponse("no comments yet")	
+	else:
+		return HttpResponse("invalid input")	
 
+def commnet(request):
+	name = request.GET.get("name", "")
+	title = request.GET.get("title", "")
+	content = request.GET.get("content", "")
+	timestamp = request.GET.get("timestamp", "")
+	if name and title and content and timestamp:
+		comment.objects.create(name =name,title = title, content = content,timestamp = timestamp)
+		return HttpResponse("success")	
+	else:
+		return HttpResponse("error")	
 # def get_user_watched_movies(request):  #later
 # 	pass
 
