@@ -11,7 +11,6 @@ from application.models import *
 def index(request):
 	return render(request,'index.html')
 
-
 #movie
 def search_movie(request):
 	title = request.GET.get("title", "")
@@ -25,11 +24,10 @@ def recommend_movie(request):
 	# this part for mapreduce
 	pass
 
-
 def get_movie_comment(request):
 	title = request.GET.get("title", "")
 	if title:
-		comments = list(comment.objects.filter(title=title)[0:11].values())
+		comments = list(comment.objects.filter(title=title).values())
 		if(len(comments)):
 			return HttpResponse("no comments yet")	
 		return JsonResponse(comments, safe = False)
@@ -59,14 +57,14 @@ def register(request):
 		if(len(user.objects.filter(name=name))):			
 			return HttpResponse("name already taken, choose another name")
 		# from application.models import user
-		user.objects.create(name=name, email = email, pw = pw)
-		return HttpResponse("success")
+		# userid = user.objects.all()
+		user.objects.create(name=name, email = email, pw = pw) #,userid=userid?????????????????
+		return HttpResponse("success, Userid is")
 
 def login(request):
 	email = request.GET.get('email',"")
 	pw = request.GET.get('pw',"")
 	if email and pw:
-		from application.models import user
 		res = user.objects.filter(email = email)
 		if res and len(res):
 			return HttpResponse("true")
@@ -97,11 +95,11 @@ def delete(request):
 		return HttpResponse("true")
 
 #user-movie
-def add_favor(request):    #later
-	pass
+# def add_favor(request):    #later
+# 	pass
 
-def get_favor(request):		 #later	
-	pass
+# def get_favor(request):		 #later	
+# 	pass
 
 def get_user_rate_comment(request):
 	# email = request.GET.get("email", "")
@@ -113,37 +111,54 @@ def get_user_rate_comment(request):
 	# 	return HttpResponse("error")	
 	pass
 
-def get_user_watched_movies(request):  #later
-	pass
+# def get_user_watched_movies(request):  #later
+# 	pass
 
-def add_watched_movie(request):  #later
-	pass
+# def add_watched_movie(request):  #later
+# 	pass
 
 
 
 #user-social
 def add_friend(request):
-	e1 = request.GET.get("email1", "")
-	e2 = request.GET.get("email2", "")
-	if e1 and e2:
-		from application.models import friendship
-		friendship.objects.create(email1=e1, email2=e2)
+	name1 = request.GET.get("name1", "")
+	name2 = request.GET.get("name2", "")
+	if name1 and name2:
+		friendship.objects.create(name1=name1, name2=name2)
 		return HttpResponse("true")
 	else:
 		return HttpResponse("false")
 
 
 def get_friend_list(request):
-	pass
+	name = request.GET.get("name", "")
+	if name:
+		friends=list(friendship.objects.filter(name1=name).values())
+		if(len(friends)):
+			return JsonResponse(friends, safe = False)
+		else:
+			return HttpResponse("you have no friends!")
 
 
 def deletefriend(request):
-	e1 = request.GET.get("email1", "")
-	e2 = request.GET.get("email2", "")
-	if e1 and e2:
-		from application.models import friendship
-		friendship.objects.filter(email1=e1, email2=e2).delete()
+	name1 = request.GET.get("name1", "")
+	name2 = request.GET.get("name2", "")
+	if name1 and name2:
+		friendship.objects.filter(name1=name1, name2=name2).delete()
 		return HttpResponse("true")
 	else:
 		return HttpResponse("false")
 
+
+def search_user(request):
+	target = request.GET.get("target", "")
+	if target:
+		search_email = list(friendship.objects.filter(email__contains=target).values())
+		search_name = list(friendship.objects.filter(nsme__contains=target).values())
+		all_results = search_name + search_email
+		if(len(all_results)):
+			return JsonResponse(all_results, safe = False)
+		else:
+			return HttpResponse("no search results")
+	else:
+		return HttpResponse("invalid input")

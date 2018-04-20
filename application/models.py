@@ -4,8 +4,8 @@
 from django.db import models
 
 class movie(models.Model):
+    movie_id = models.IntegerField(primary_key=True)
     budget = models.IntegerField(null = True,blank=True)#,blank=True
-    id = models.IntegerField(primary_key=True)
     imdb_id = models.CharField(max_length = 20,null = True,blank=True)
     original_language = models.CharField(max_length = 10,null = True,blank=True)
     popularity = models.FloatField(null = True,blank=True)
@@ -18,59 +18,33 @@ class movie(models.Model):
     vote_average = models.FloatField(null = True,blank=True)
     vote_count =  models.IntegerField(null = True,blank=True)
 
-    # def __unicode__(self):
-    #     return self.id
-
 class user(models.Model):
-    #Users (names, email, passwords)
+    user_id = models.IntegerField(default=0,primary_key=True)
     name = models.CharField(max_length=30, default="")
     email = models.EmailField(default="")
     pw = models.CharField(max_length = 100, default="")
-    userId = models.IntegerField(default=0,primary_key=True)
-
-class tweet(models.Model):
-    #Tweet (message_id, content, timestamp)
-    message_id = models.IntegerField(primary_key=True)
-    content = models.TextField(default="")
-    timestamp = models.DateTimeField(default="")
 
 class comment(models.Model):
     #Comment (content, timestamp)
-    email = models.EmailField(default="")
+    name = models.CharField(max_length=30, default="")
     title = models.CharField(default="",max_length = 30)
     content = models.TextField(default="")
-    timestamp = models.DateTimeField(default="",primary_key=True)
+    timestamp = models.TextField(default="")
     class Meta:
-        unique_together = ("email", "timestamp")
+        unique_together = ("name", "timestamp")
 
 class rate(models.Model):
-    #Rate (email, title, year, Ratingscores, ratingDate)
-    userId = models.IntegerField(default=0)
-    movieId = models.IntegerField(default=0)
-    # year = models.IntegerField(null = True,blank=True)
+    user_id = models.IntegerField(default=0)
+    movie_id = models.IntegerField(default = 0)
     rating = models.FloatField(null = True,blank=True)
-    timestamp = models.CharField(max_length = 30,default="")
+    timestamp = models.TextField(max_length = 30,default="")
     class Meta:
-        unique_together = ("userId", "movieId")
+        unique_together = ("user_id", "movie_id")
 
-class post(models.Model):
-    # Post (email, message_id)
-    email = models.EmailField(default="")
-    message_id = models.IntegerField(default="")
-    class Meta:
-        unique_together = ("email", "message_id")
-
-class recommend(models.Model):
-    #Recommend (email, title, year)
-    email = models.EmailField(default="")
-    title = models.CharField(default="", max_length=30)
-    year = models.IntegerField(null=True, blank=True)
-    class Meta:
-        unique_together = ("email", "title", "year")
 
 class friendship(models.Model):
     #Frinends (email, email)
-    email1 = models.EmailField(default="")
-    email2 = models.EmailField(default="")
+    name1 = models.CharField(max_length=30, default="")
+    name2 = models.CharField(max_length=30, default="")
     class Meta:
-        unique_together = ("email1", "email2")
+        unique_together = ("name1", "name2")
