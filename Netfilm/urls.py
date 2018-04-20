@@ -26,7 +26,8 @@ urlpatterns = [
 	path('login/',app.login), #new 24.15.43
 	path('register/',app.register),
     path('delete/',app.delete),
-    path('search/',app.search_movie),
+    # path('search/',app.search_movie),
+    path('search/',app.get_movie_comment),  #!!
     # change_pw
     # path('chat/',chat.urls),
     # url(r'^$', views.index, name='index'),

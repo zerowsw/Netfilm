@@ -26,13 +26,24 @@ def recommend_movie(request):
 	pass
 
 
-def get_movie_rate_comment(request):
+def get_movie_comment(request):
 	title = request.GET.get("title", "")
-	# if title:
-
+	if title:
+		comments = list(comment.objects.filter(title=title)[0:11].values())
+		if(len(comments)):
+			return HttpResponse("no comments yet")	
+		return JsonResponse(comments, safe = False)
+	else:
+		return HttpResponse("false")		
 	pass
 
 def get_movie_info(request):
+	title =  request.GET.get("title", "")
+	if title:
+		qs = list(movie.objects.filter(title=title)[0].values())
+		return JsonResponse(qs, safe = False)
+	else:
+		return HttpResponse("false")
 	pass
 
 #user-basic
@@ -93,18 +104,19 @@ def get_favor(request):		 #later
 	pass
 
 def get_user_rate_comment(request):
-	email = request.GET.get("email", "")
-	if email:
-		qs = list(movie.objects.filter(title__contains=title)[0:11].values())
-		return JsonResponse(qs, safe = False)
-	else:
-		return HttpResponse("false")	
+	# email = request.GET.get("email", "")
+	# if email:
+	# 	comment = list(comment.objects.filter(email=email)[0:11].values())
+	# 	rate = list(comment.objects.filter(email=email)[0:11].values())
+	# 	return JsonResponse(qs, safe = False)
+	# else:
+	# 	return HttpResponse("error")	
 	pass
 
-def get_user_watched_movies(request):
+def get_user_watched_movies(request):  #later
 	pass
 
-def add_watched_movie(request):
+def add_watched_movie(request):  #later
 	pass
 
 

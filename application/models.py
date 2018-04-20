@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
- 
+
 from django.db import models
 
 class movie(models.Model):
@@ -17,14 +17,16 @@ class movie(models.Model):
     video = models.CharField(max_length = 6,null = True,blank=True)
     vote_average = models.FloatField(null = True,blank=True)
     vote_count =  models.IntegerField(null = True,blank=True)
+
     # def __unicode__(self):
     #     return self.id
 
 class user(models.Model):
     #Users (names, email, passwords)
     name = models.CharField(max_length=30, default="")
-    email = models.EmailField(default="", primary_key=True)
+    email = models.EmailField(default="")
     pw = models.CharField(max_length = 100, default="")
+    userId = models.IntegerField(default=0,primary_key=True)
 
 class tweet(models.Model):
     #Tweet (message_id, content, timestamp)
@@ -35,10 +37,11 @@ class tweet(models.Model):
 class comment(models.Model):
     #Comment (content, timestamp)
     email = models.EmailField(default="")
+    title = models.CharField(default="",max_length = 30)
     content = models.TextField(default="")
-    timestamp = models.DateTimeField(default="")
+    timestamp = models.DateTimeField(default="",primary_key=True)
     class Meta:
-        unique_together = ("email", "content")    
+        unique_together = ("email", "timestamp")
 
 class rate(models.Model):
     #Rate (email, title, year, Ratingscores, ratingDate)
