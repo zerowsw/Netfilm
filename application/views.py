@@ -7,6 +7,7 @@ from django.core import serializers
 from application.models import *
 
 
+
 #web
 def index(request):				#done
 	return render(request,'index.html')  
