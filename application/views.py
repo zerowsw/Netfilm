@@ -16,6 +16,16 @@ def index(request):				#done
 def chat(request):
 	return render(request,'chat.html')
 
+def loginpage(request):
+	return render(request,'loginpage.html')
+
+def registerpage(request):
+	return render(request,'registerpage.html')
+
+def searchpage(request):
+	return render(request,'searchpage.html')
+
+
 #movie
 def search_movie(request):
 	title = request.GET.get("title", "")
@@ -117,7 +127,7 @@ def get_user_comment(request):
 	else:
 		return HttpResponse("invalid input")	
 
-def commnet(request):
+def comment(request):
 	name = request.GET.get("name", "")
 	title = request.GET.get("title", "")
 	content = request.GET.get("content", "")

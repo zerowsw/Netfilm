@@ -24,10 +24,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',app.index),
 	path('login/',app.login), #new 24.15.43
+    path('loginpage/',app.loginpage),
 	path('register/',app.register),
+    path('registerpage/',app.registerpage),
     path('delete/',app.delete),
     # path('search/',app.search_movie),
     path('search/',app.get_movie_comment),  #!!
+    path('searchpage/',app.searchpage),
     path('chat/', app.chat)
     # change_pw
     # path('chat/',chat.urls),
