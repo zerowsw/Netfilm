@@ -28,6 +28,7 @@ urlpatterns = [
     path('delete/',app.delete),
     # path('search/',app.search_movie),
     path('search/',app.get_movie_comment),  #!!
+    path('chat/', app.chat)
     # change_pw
     # path('chat/',chat.urls),
     # url(r'^$', views.index, name='index'),

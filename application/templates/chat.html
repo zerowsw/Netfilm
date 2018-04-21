@@ -1,0 +1,63 @@
+<!doctype html>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Netfilm</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body id="chat">
+    <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar" style="background-color: black">
+      <div class="container">
+        <a class="navbar-brand" href="/">NetFilm</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span><i class="ion-navicon"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="probootstrap-menu">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Sign in/Sign up</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Chat Room</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="tile">
+        <div class="tile is-4 is-vertical">
+            <div class="box">
+                <div class="level-item">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <input class="input" type="text" placeholder="search a friend">
+                        </p>
+                        <p class="control">
+                            <button class="button">Search</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-vertical">
+            <div class="tile">
+                <div id="show_message" class="box"></div>
+            </div>
+            <div class="tile">
+                <div id="input_message" class="box">
+                    <div class="field has-addons">
+                        <div id="input_message" class="control">
+                            <input class="input is-hovered" type="text" placeholder="massage input">
+                        </div>
+                        <div class="control">
+                            <button class="button is-dark has-text-white">Send</button>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

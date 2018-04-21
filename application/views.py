@@ -10,7 +10,11 @@ from application.models import *
 
 #web
 def index(request):				#done
-	return render(request,'index.html')  
+	return render(request,'index.html')
+
+#chat page
+def chat(request):
+	return render(request,'chat.html')
 
 #movie
 def search_movie(request):
