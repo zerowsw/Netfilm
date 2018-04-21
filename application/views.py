@@ -100,12 +100,6 @@ def delete(request):
 		return HttpResponse("true")
 
 #user-movie
-# def add_favor(request):    #later
-# 	pass
-
-# def get_favor(request):		 #later	
-# 	pass
-
 def get_user_comment(request):
 	name = request.GET.get("name", "")
 	if name:
@@ -128,13 +122,6 @@ def commnet(request):
 		return HttpResponse("success")	
 	else:
 		return HttpResponse("error")	
-# def get_user_watched_movies(request):  #later
-# 	pass
-
-# def add_watched_movie(request):  #later
-# 	pass
-
-
 
 #user-social
 def add_friend(request):
