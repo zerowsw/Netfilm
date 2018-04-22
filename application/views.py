@@ -48,8 +48,9 @@ def get_movie_comment(request):
 	if title:
 		comments = list(comment.objects.filter(title=title).values())
 		if(len(comments)):
-			return HttpResponse("no comments yet")	
-		return JsonResponse(comments, safe = False)
+			return JsonResponse(comments, safe = False)
+		else:
+			return HttpResponse("no comments yet")
 	else:
 		return HttpResponse("false")		
 	pass
@@ -100,7 +101,7 @@ def login(request):
 		if res and len(res):
 			name = res[0].name
 			request.session['login_name'] = name
-			return HttpResponse("You are successfully loged in! ")
+			return HttpResponse("You have successfully logged in! ")
 			# return HttpResponse(name)
 		else:
 			return HttpResponse("Can't log in, please check your account or password!")
