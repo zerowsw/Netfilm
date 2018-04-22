@@ -87,9 +87,9 @@ def login(request):
 	if email and pw:
 		res = user.objects.filter(email = email)
 		if res and len(res):
-			return HttpResponse("true")
+			return HttpResponse("You are successfully loged in!")
 		else:
-			return HttpResponse("false")
+			return HttpResponse("Can't log in, please check your account or password!")
 
 def change_pw(request):
 	email = request.GET.get("email", "")
