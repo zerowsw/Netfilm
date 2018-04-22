@@ -34,6 +34,9 @@ def searchpage(request):
 def movieinfo(request):
 	return render(request,'movie-info.html')
 
+def userprofile(request):
+	return render(request,'userprofile.html')
+
 #movie
 def search_movie(request):
 	title = request.GET.get("title", "")
@@ -48,6 +51,14 @@ def search_movie(request):
 
 def recommend_movie(request):
 	# this part for mapreduce
+	user_name = request.GET.get("name", "")
+	all_rating = list(rate.objects.all().values())
+	movie_to_index = {}
+
+
+
+
+
 	pass
 
 def get_movie_comment(request):
@@ -88,14 +99,17 @@ def register(request):
 			return HttpResponse("name already taken, choose another name")
 		# userid = user.objects.all()
 
-		users = user.objects.all()
-		user_id_set = [users[i].user_id for i in range(0,len(users))]
+		all_users = user.objects.all()
+		user_id_set = [all_users[i].user_id for i in range(0,len(all_users))]
 		new_id = max(user_id_set) + 1
 		
 		try:
-			user.objects.create(user_id = new_id,name=name, email = email, pw = pw) #,userid=userid?????????????????
+			# user.objects.create(user_id = new_id,name=name, email = email, pw = pw) #,userid=userid?????????????????
+			# u = user(user_id = new_id,name=name, email = email, pw = pw)
+			# u.save()
+			user.objects.get_or_create(user_id = new_id,name=name, email = email, pw = pw)
 		except ConnectionAbortedError:
-			return HttpResponse("success, newid  is %d"%(new_id))
+			return HttpResponse("???")
 		return HttpResponse("success, newid  is %d"%(new_id))
 		# return HttpResponse("success, Userid is",user.objects.filter(name=name)[0].user_id)
 		# return HttpResponse("success, Userid is",100)
@@ -104,7 +118,7 @@ def login(request):
 	email = request.GET.get('email',"")
 	pw = request.GET.get('pw',"")
 	if email and pw:
-		res = user.objects.filter(email = email,pw=pw)
+		res = user.objects.filter(email = email,pw = pw)
 		if res and len(res):
 			name = res[0].name
 			request.session['login_name'] = name
