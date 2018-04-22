@@ -221,7 +221,7 @@ def search_user(request):
 		search_email = list(user.objects.filter(email__contains=target).values())
 		if(len(search_email)):
 			return JsonResponse(search_email, safe = False)
-		search_name = list(user.objects.filter(nsme__contains=target).values())
+		search_name = list(user.objects.filter(name__contains=target).values())
 		if(len(search_name)):
 			return JsonResponse(search_name, safe = False)
 		else:
