@@ -7,6 +7,7 @@ from django.core import serializers
 from application.models import *
 
 
+
 #web
 def index(request):				#done
 	return render(request,'index.html')
@@ -70,26 +71,15 @@ def register(request):
 	email = request.GET.get("email","")
 	pw = request.GET.get("pw","")
 	if email and pw:
-		# if(len(pw) < 4):
-		# 	return HttpResponse("pwTooShort")
+		if(len(pw) < 4):
+			return HttpResponse("pwTooShort")
 		if(len(user.objects.filter(email=email))):		
 			return HttpResponse("email already taken, please login")
 		if(len(user.objects.filter(name=name))):			
 			return HttpResponse("name already taken, choose another name")
 		# userid = user.objects.all()
-
-		
-		users = user.objects.all()
-		user_id_set = [users[i].user_id for i in range(0,len(users))]
-		new_id = max(user_id_set) + 1
-		
-		try:
-			user.objects.create(user_id = new_id,name=name, email = email, pw = pw) #,userid=userid?????????????????
-		except ConnectionAbortedError:
-			return HttpResponse("success, newid  is %d"%(new_id))
-		return HttpResponse("success, newid  is %d"%(new_id))
-		# return HttpResponse("success, Userid is",user.objects.filter(name=name)[0].user_id)
-		# return HttpResponse("success, Userid is",100)
+		user.objects.create(name=name, email = email, pw = pw) #,userid=userid?????????????????
+		return HttpResponse("success, Userid is")
 
 def login(request):
 	email = request.GET.get('email',"")
