@@ -151,14 +151,14 @@ def get_user_comment(request):
 	else:
 		return HttpResponse("invalid input")	
 
-def comment(request):
+def make_comment(request):
 	name = request.GET.get("name", "")
 	title = request.GET.get("title", "")
 	content = request.GET.get("content", "")
 	timestamp = request.GET.get("timestamp", "")
 	if name and title and content and timestamp:
 		comment.objects.create(name =name,title = title, content = content,timestamp = timestamp)
-		return HttpResponse("success")	
+		return HttpResponse("successful comment!")	
 	else:
 		return HttpResponse("invalid input")	
 
