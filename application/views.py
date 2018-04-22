@@ -26,6 +26,8 @@ def registerpage(request):
 def searchpage(request):
 	return render(request,'searchpage.html')
 
+def movieinfo(request):
+	return render(request,'movie-info.html')
 
 #movie
 def search_movie(request):
