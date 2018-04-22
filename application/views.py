@@ -34,6 +34,8 @@ def searchpage(request):
 def movieinfo(request):
 	return render(request,'movie-info.html')
 
+def userprofile(request):
+	return render(request,'userprofile.html')
 #movie
 def search_movie(request):
 	title = request.GET.get("title", "")
@@ -95,7 +97,7 @@ def register(request):
 		try:
 			user.objects.create(user_id = new_id,name=name, email = email, pw = pw) #,userid=userid?????????????????
 		except ConnectionAbortedError:
-			return HttpResponse("success, newid  is %d"%(new_id))
+			return HttpResponse("。。。")
 		return HttpResponse("success, newid  is %d"%(new_id))
 		# return HttpResponse("success, Userid is",user.objects.filter(name=name)[0].user_id)
 		# return HttpResponse("success, Userid is",100)
@@ -207,7 +209,7 @@ def search_user(request):
 		search_email = list(user.objects.filter(email__contains=target).values())
 		if(len(search_email)):
 			return JsonResponse(search_email, safe = False)
-		search_name = list(user.objects.filter(nsme__contains=target).values())
+		search_name = list(user.objects.filter(name__contains=target).values())
 		if(len(search_name)):
 			return JsonResponse(search_name, safe = False)
 		else:
