@@ -205,10 +205,11 @@ def search_user(request):
 	target = request.GET.get("target", "")
 	if target:
 		search_email = list(user.objects.filter(email__contains=target).values())
+		if(len(search_email)):
+			return JsonResponse(search_email, safe = False)
 		search_name = list(user.objects.filter(nsme__contains=target).values())
-		all_results = search_name + search_email
-		if(len(all_results)):
-			return JsonResponse(all_results, safe = False)
+		if(len(search_name)):
+			return JsonResponse(search_name, safe = False)
 		else:
 			return HttpResponse("no search results")
 	else:
