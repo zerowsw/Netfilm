@@ -31,7 +31,13 @@ urlpatterns = [
     path('search/',app.search_movie),
     # path('search/',app.get_movie_comment),  #!!
     path('searchpage/',app.searchpage),
-    path('chat/', app.chat)
+    path('chat/', app.chat),
+    path('movieinfo/', app.movieinfo),
+    path('makecomment/', app.make_comment),
+    path('getmoviecomment/', app.get_movie_comment),
+    path('userprofile/', app.userprofile),
+    path('searchuser/', app.search_user)
+
     # change_pw
     # path('chat/',chat.urls),
     # url(r'^$', views.index, name='index'),
