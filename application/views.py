@@ -10,6 +10,7 @@ from application.models import *
 
 #web
 def index(request):				#done
+
 	return render(request,'index.html')
 
 #chat page
@@ -95,11 +96,24 @@ def login(request):
 	email = request.GET.get('email',"")
 	pw = request.GET.get('pw',"")
 	if email and pw:
-		res = user.objects.filter(email = email)
+		res = user.objects.filter(email = email,pw=pw)
 		if res and len(res):
-			return HttpResponse("You are successfully loged in!")
+			name = res[0].name
+			request.session['login_name'] = name
+			return HttpResponse("You are successfully loged in! ")
+			# return HttpResponse(name)
 		else:
 			return HttpResponse("Can't log in, please check your account or password!")
+
+def logout(request):
+	name = request.GET.get('name',"")
+	try:
+		del request.session['login_name']
+	except KeyError:
+		pass
+	else:
+		return HttpResponse("You're logged out.")
+
 
 def change_pw(request):
 	email = request.GET.get("email", "")
@@ -146,7 +160,7 @@ def comment(request):
 		comment.objects.create(name =name,title = title, content = content,timestamp = timestamp)
 		return HttpResponse("success")	
 	else:
-		return HttpResponse("error")	
+		return HttpResponse("invalid input")	
 
 #user-social
 def add_friend(request):
