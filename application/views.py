@@ -52,13 +52,17 @@ def search_movie(request):
 def recommend_movie(request):
 	# this part for mapreduce
 	user_name = request.GET.get("name", "")
-	all_rating = list(rate.objects.all().values())
-	movie_to_index = {}
 
-
-
-
-
+	import random as rd
+	all_movie = list(movie.objects.all().values())
+	sample_size = 1000
+	threshold = 8.0
+	sample_movie = rd.sample(all_movie,sample_size)
+	good_sample_movie = [sample_movie[i] for i in range(0,sample_size) if sample_movie[i]['vote_average']>threshold]
+	if(len(good_sample_movie)):
+		return JsonResponse(comments, safe = False)
+	else:
+		return HttpResponse("no recommendations yet!")
 	pass
 
 def get_movie_comment(request):
