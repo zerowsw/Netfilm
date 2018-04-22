@@ -62,7 +62,7 @@
     <!-- END section -->  
 
 
-    <section class="probootstrap_section" id="" style="background-image: url('https://assets.nflxext.com/ffe/siteui/acquisition/login/login-the-crown_2-1500x1000.jpg'); background-repeat: no-repeat; background-size: contain;" >
+    <section class="probootstrap_section" id="" style=" background-color: black; background-repeat: no-repeat; background-size: contain;" >
       <div class="container">
         <div class="row text-center mb-5 probootstrap-animate">
           <div class="col-md-12">
@@ -75,33 +75,34 @@
                   
                   <div class="tab-content">
                     <div class="tab-content-inner active" data-content="signup">
-                      <h3 style="color: white; text-align: center;">Register</h3>
+                      <h4 style="color: white; text-align: center;">Register</h4>
                       <form action="#">
-                        <!-- <div class="row form-group">
-                          <div class="col-md-12">
-                            <label for="fullname">Full Name</label>
-                            <input type="text" id="fullname" class="form-control">
-                          </div>
-                        </div> -->
                         <div class="row form-group">
                           <div class="col-md-12">
-                            <label for="fullname">Email</label>
-                            <!-- <input type="text" id="fullname" class="form-control"> -->
-                            <input class="form-control" id="registerEmail" type="text" placeholder="Enter Email" name="email" required>
+                            <label for="">Full Name</label>
+                            <input class="form-control" id="registerName" type="text" placeholder="Enter Your Full Name" name="email" required>
+
                           </div>
                         </div>
                         <div class="row form-group">
                           <div class="col-md-12">
-                            <label for="fullname">PassWords</label>
+                            <label for="">Email</label>
                             <!-- <input type="text" id="fullname" class="form-control"> -->
-                            <input class="form-control" id="registerPassword" type="password" placeholder="Enter Password" name="psw" required>
+                            <input class="form-control" id="registerEmail" type="text" placeholder="Enter Your Email" name="email" required>
                           </div>
                         </div>
                         <div class="row form-group">
                           <div class="col-md-12">
-                            <label for="fullname">Repeat PassWords</label>
+                            <label for="">PassWords</label>
                             <!-- <input type="text" id="fullname" class="form-control"> -->
-                            <input class="form-control" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                            <input class="form-control" id="registerPassword" type="password" placeholder="Enter Your Password" name="psw" required>
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col-md-12">
+                            <label for="">Repeat PassWords</label>
+                            <!-- <input type="text" id="fullname" class="form-control"> -->
+                            <input class="form-control" type="password" placeholder="Please Repeat Password" name="psw-repeat" required>
                           </div>
                         </div>
 
@@ -109,11 +110,12 @@
                           <div class="col-md-12">
 
                             <!-- <input type="submit" class="btn btn-primary btn-block" value="Search" > -->
-                            <a id = "register" href="#section-search-result" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Register</a>
+                            <a id = "register" href="" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Register</a>
                             <script type="text/javascript">
 
                               $("#register").click(()=>{
                                 let data = {
+                                  "name" : document.getElementById('registerName').value,
                                   "email" : document.getElementById('registerEmail').value,
                                   "pw" : document.getElementById('registerPassword').value
                                 };
