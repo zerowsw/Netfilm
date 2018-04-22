@@ -10,8 +10,13 @@ from application.models import *
 
 #web
 def index(request):				#done
-
-	return render(request,'index.html')
+	try:
+		current_name = request.session['login_name']
+	except KeyError:
+		return render(request,'index.html')
+	else:
+		return render(request,'index.html',context={'current_name' : current_name})
+		
 
 #chat page
 def chat(request):
@@ -199,8 +204,8 @@ def deletefriend(request):
 def search_user(request):
 	target = request.GET.get("target", "")
 	if target:
-		search_email = list(friendship.objects.filter(email__contains=target).values())
-		search_name = list(friendship.objects.filter(nsme__contains=target).values())
+		search_email = list(user.objects.filter(email__contains=target).values())
+		search_name = list(user.objects.filter(nsme__contains=target).values())
 		all_results = search_name + search_email
 		if(len(all_results)):
 			return JsonResponse(all_results, safe = False)
