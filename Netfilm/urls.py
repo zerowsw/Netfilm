@@ -28,8 +28,8 @@ urlpatterns = [
 	path('register/',app.register),
     path('registerpage/',app.registerpage),
     path('delete/',app.delete),
-    # path('search/',app.search_movie),
-    path('search/',app.get_movie_comment),  #!!
+    path('search/',app.search_movie),
+    # path('search/',app.get_movie_comment),  #!!
     path('searchpage/',app.searchpage),
     path('chat/', app.chat)
     # change_pw
