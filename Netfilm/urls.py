@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',app.index),
 	path('login/',app.login), #new 24.15.43
-    path('loginpage/',app.loginpage),
+    path('loginpage/',app.login),
 	path('register/',app.register),
     path('registerpage/',app.registerpage),
     path('delete/',app.delete),

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
 # Create your views here.
-
+from django.http import HttpResponseRedirect
 from application.models import *
 
 
@@ -23,13 +23,17 @@ def chat(request):
 	return render(request,'chat.html')
 
 def loginpage(request):
+
 	return render(request,'loginpage.html')
 
 def registerpage(request):
 	return render(request,'registerpage.html')
 
 def searchpage(request):
-	return render(request,'searchpage.html')
+	if request.method == 'POST':
+		return render(request, 'searchpage.html')
+	else:
+		return render(request,'searchpage.html')
 
 def movieinfo(request):
 	return render(request,'movie-info.html')
@@ -115,17 +119,24 @@ def register(request):
 		# return HttpResponse("success, Userid is",100)
 
 def login(request):
-	email = request.GET.get('email',"")
-	pw = request.GET.get('pw',"")
-	if email and pw:
-		res = user.objects.filter(email = email,pw = pw)
-		if res and len(res):
-			name = res[0].name
-			request.session['login_name'] = name
-			return HttpResponse("You have successfully logged in! ")
-			# return HttpResponse(name)
-		else:
-			return HttpResponse("Can't log in, please check your account or password!")
+	if request.method == 'POST':
+		# email = request.GET.get('email',"")
+		# pw = request.GET.get('pw',"")
+
+		return HttpResponseRedirect('/searchpage/')
+		# if email and pw:
+		# 	res = user.objects.filter(email = email,pw = pw)
+		# 	if res and len(res):
+		# 		name = res[0].name
+		# 		request.session['user_name'] = name
+		# 		request.session['is_login'] = True
+		# 		# return HttpResponse("You have successfully logged in! ")
+        #
+		# 		return HttpResponseRedirect('/searchpage/')
+		# 		# return HttpResponse(name)
+		# 	else:
+		# 		return HttpResponse("Can't log in, please check your account or password!")
+	return render(request,'loginpage.html')
 
 def logout(request):
 	name = request.GET.get('name',"")
