@@ -38,7 +38,9 @@ urlpatterns = [
     path('getmoviecomment/', app.get_movie_comment),
     path('userprofile/', app.userprofile),
     path('searchuser/', app.search_user),
-    path('recommendpage/',app.recommendpage)
+    path('recommendpage/',app.recommendpage),
+    path('recommendmovie/', app.recommend_movie),
+    path('echo/', app.echo),
     # change_pw
     # path('chat/',chat.urls),
     # url(r'^$', views.index, name='index'),
