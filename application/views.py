@@ -6,8 +6,8 @@ from django.core import serializers
 from django.http import HttpResponseRedirect
 from application.models import *
 from dwebsocket.decorators import accept_websocket
-
-
+from django.utils import timezone
+import json
 
 #web
 def index(request):				#done
@@ -21,7 +21,7 @@ def index(request):				#done
 
 #chat page
 def chat(request):
-	return render(request,'chat.html')
+	return render(request,'chat.html', {'username' : request.session.get('username', 'wsw')})
 
 
 clients = []
@@ -163,20 +163,21 @@ def login(request):
 	if request.method == 'POST':
 		email = request.GET.get('email',"")
 		pw = request.GET.get('pw',"")
-
+		request.session['username'] = email
+		request.session['is_login'] = True
 		#return HttpResponseRedirect('/searchpage/')
-		if email and pw:
-			res = user.objects.filter(email = email,pw = pw)
-			if res and len(res):
-				name = res[0].name
-				request.session['user_name'] = name
-				request.session['is_login'] = True
-				# return HttpResponse("You have successfully logged in! ")
-
-				return HttpResponseRedirect('/searchpage/')
-				# return HttpResponse(name)
-			else:
-				return HttpResponse("Can't log in, please check your account or password!")
+		# if email and pw:
+		# 	res = user.objects.filter(email = email,pw = pw)
+		# 	if res and len(res):
+		# 		name = res[0].name
+		# 		request.session['username'] = name
+		# 		request.session['is_login'] = True
+		# 		# return HttpResponse("You have successfully logged in! ")
+        #
+		# 		return HttpResponseRedirect('/searchpage/')
+		# 		# return HttpResponse(name)
+		# 	else:
+		# 		return HttpResponse("Can't log in, please check your account or password!")
 	return render(request,'loginpage.html')
 
 def logout(request):

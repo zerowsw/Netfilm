@@ -21,7 +21,29 @@
             websocket.onmessage = function (responseData) {
                 console.log('message: ' + responseData.data);
                 var jsondata = eval('(' + responseData.data + ')');
-                $('#show_message').append('<p>' + jsondata.name + '</p>');
+                //$('#show_message').append('<p>' + jsondata.name + '</p>');
+
+                var ele = $('<tr></tr>')
+
+                ele.append(
+                    $("<td></td>").text(new Date().toLocaleTimeString())
+                )
+
+                ele.append(
+                    $("<td></td>").text('    wsw')
+                )
+
+
+                $('#show_message').append(ele)
+
+                var ele2 = $('<tr></tr>')
+
+                ele2.append(
+                    $("<td></td>").text(jsondata.name)
+                )
+
+                $('#show_message').append(ele2)
+
             };
             window.websocket = websocket;
 
@@ -33,6 +55,8 @@
             }else{
                 window.websocket.send(JSON.stringify({"name":$('#message').val()}));
             }
+
+            $('#message').val("");
         });
     });
     //]]></script>
@@ -42,7 +66,8 @@
 <body id="chat">
     <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar" style="background-color: black">
       <div class="container">
-        <a class="navbar-brand" href="/">NetFilm</a>
+
+        <a class="navbar-brand" href="/">{{username}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
           <span><i class="ion-navicon"></i></span>
         </button>
@@ -74,7 +99,16 @@
         </div>
         <div class="tile is-vertical">
             <div class="tile">
-                <div id="show_message" class="box"></div>
+                <table id="show_message" class="box">
+                    <tbody>
+                        {% for message in messages %}
+                          <tr>
+                            <td>{{ message.timeinfo }}</td>
+                            <td>{{ message.message }}</td>
+                          </tr>
+                        {% endfor %}
+                     </tbody>
+                </table>
             </div>
             <div class="tile">
                 <div id="input_message" class="box">
