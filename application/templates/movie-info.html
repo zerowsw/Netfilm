@@ -75,18 +75,18 @@
         </div>
         <div class="row">
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3" style="margin: 0 auto; ">
-            <a href="#" class="probootstrap-thumbnail">
-              <img src="https://robohash.org/6" alt="Free Template by ProBootstrap.com" class="img-fluid">
+            <a href="" class="probootstrap-thumbnail">
+              <img src="https://robohash.org/6"  class="img-fluid">
               <div class="probootstrap-text">
-                <h3>Movie1</h3>
+                <h3>Movie</h3>
               </div>
             </a>
           </div>
           <div class="col-md-12">
 {#            <label for="fullname">Movie Comment</label>#}
 {#            <input type="text" id="movieComment" class="form-control">#}
-              <input type="text" id="input1" class="form-control">
-            <a id = "getMovieInfo" href="#section-search-result" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Get Info</a>
+            <input type="text" id="input1">
+            <a id = "getMovieInfo" href="#" role="button" class="btn btn-primary">Get Info</a>
 
               <script type="text/javascript">
 
@@ -102,7 +102,7 @@
                       //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
                       //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
                       document.getElementById(id).innerHTML = info;
-                      alert(response)
+                      console.log(response)
 
 
                       });
@@ -111,53 +111,22 @@
           </div>
         </div>
       </div>
-    </section>   
+{#    </section>   #}
   
 
 
-    <div class="probootstrap-text" id="section-search-result">
-        <h3 id='searchResult'></h3>
+    <div class="probootstrap-text" id="movieinfo">
+        <h3 style="text-align: center" id='searchResult'></h3>
     </div>
 
-
-
-
-     <section class="probootstrap_section" id="">
+{#    <section class="probootstrap_section" id="">#}
       <div class="container">
         <div class="row text-center mb-5 probootstrap-animate">
         </div>
         <div class="row">
           <div class="col-md-12">
-            <input type="text" id="input2" class="form-control">
-            <a id = "writeComment" href="#" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Write Comment</a>
 
-              <script type="text/javascript">
-
-                  $("#writeComment").click(()=>{
-                      let data = {
-                          "name" : 'abc',
-                          "title" : 'The A',
-                          "content" : document.getElementById('input2').value,
-                          "timestamp" : Math.floor(Date.now() / 1000)};
-                      let url = "http://127.0.0.1:8000/makecomment/";
-                      $.get(url,data,(response)=>{
-                        alert(response)
-                      });
-                   });
-              </script>
-          </div>
-        </div>
-      </div>
-    </section>
-
-<section class="probootstrap_section" id="">
-      <div class="container">
-        <div class="row text-center mb-5 probootstrap-animate">
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h3 id="content"></h3>
-            <a id = "getComment" href="#" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Get Comment</a>
+            <a id = "getComment" href="#" role="button" class="btn btn-primary">Show All Comments</a>
 
               <script type="text/javascript">
 
@@ -167,17 +136,59 @@
                           };
                       let url = "http://127.0.0.1:8000/getmoviecomment/";
                       $.get(url,data,(response)=>{
+                        $( ".abc" ).remove();
                         console.log(response)
                         for(let i=0 ; i<response.length; i++) {
+                            commentID = 'Comment '+ i +': '
                             comment = response[i]['content']
-                            $("#content").append($("<h3>" + comment + "</div>"))
+                            $("#content").append($("<h3 class='abc'>" + commentID + comment + "</h3>"))
                         }
+                      });
+                   });
+              </script>
+          </div>
+            <div style="text-align: left" id="content"></div>
+        </div>
+      </div>
+
+
+{#     <section class="probootstrap_section" id="">#}
+      <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="container">
+              <form>
+                <div class="form-group">
+                  <label for="comment">Write Comment:</label>
+                  <textarea class="form-control" rows="5" id="comment" placeholder="Your comment here..."></textarea>
+                </div>
+              </form>
+            </div>
+            <a id = "writeComment" href="#" role="button" class="btn btn-primary">Write Comment</a>
+
+              <script type="text/javascript">
+
+                  $("#writeComment").click(()=>{
+                      let data = {
+                          "name" : 'abc',
+                          "title" : 'The A',
+                          "content" : document.getElementById('comment').value,
+                          "timestamp" : Math.floor(Date.now() / 1000)};
+                      let url = "http://127.0.0.1:8000/makecomment/";
+                      $.get(url,data,(response)=>{
+                        alert(response)
+                        document.getElementById('comment').value = null
                       });
                    });
               </script>
           </div>
         </div>
       </div>
+{#    </section>#}
+
+
     </section>
 
 

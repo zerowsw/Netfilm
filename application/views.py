@@ -30,10 +30,12 @@ def registerpage(request):
 	return render(request,'registerpage.html')
 
 def searchpage(request):
-	if request.method == 'POST':
-		return render(request, 'searchpage.html')
-	else:
-		return render(request,'searchpage.html')
+	name = request.session['user_name']
+	return render(request, 'searchpage.html',context={'name':name})
+	# if request.method == 'POST':
+	# 	return render(request, 'searchpage.html')
+	# else:
+	# 	return render(request,'searchpage.html')
 
 def movieinfo(request):
 	return render(request,'movie-info.html')
@@ -52,6 +54,16 @@ def search_movie(request):
 			return HttpResponse("no movies found! Try another keyword")
 	else:
 		return HttpResponse("false")
+
+# from django.http import HttpResponse
+# from django.template import loader
+#
+# def searchpage(request):
+#     # View code here...
+#     t = loader.get_template('./templates/searchpage.html')
+#     c = {'foo': 'bar'}
+#     return HttpResponse(t.render(c, request), content_type='application/xhtml+xml')
+#
 
 def recommend_movie(request):
 	# this part for mapreduce
@@ -84,7 +96,7 @@ def get_movie_comment(request):
 def get_movie_info(request):
 	title =  request.GET.get("title", "")
 	if title:
-		res = list(movie.objects.filter(title=title)[0].values())
+		res = list(movie.objects.filter(title=title)[0:1].values())
 		if res:
 			return JsonResponse(res, safe = False)
 		else:
@@ -124,22 +136,22 @@ def register(request):
 
 def login(request):
 	if request.method == 'POST':
-		# email = request.GET.get('email',"")
-		# pw = request.GET.get('pw',"")
+		email = request.GET.get('email',"")
+		pw = request.GET.get('pw',"")
 
-		return HttpResponseRedirect('/searchpage/')
-		# if email and pw:
-		# 	res = user.objects.filter(email = email,pw = pw)
-		# 	if res and len(res):
-		# 		name = res[0].name
-		# 		request.session['user_name'] = name
-		# 		request.session['is_login'] = True
-		# 		# return HttpResponse("You have successfully logged in! ")
-        #
-		# 		return HttpResponseRedirect('/searchpage/')
-		# 		# return HttpResponse(name)
-		# 	else:
-		# 		return HttpResponse("Can't log in, please check your account or password!")
+		#return HttpResponseRedirect('/searchpage/')
+		if email and pw:
+			res = user.objects.filter(email = email,pw = pw)
+			if res and len(res):
+				name = res[0].name
+				request.session['user_name'] = name
+				request.session['is_login'] = True
+				# return HttpResponse("You have successfully logged in! ")
+
+				return HttpResponseRedirect('/searchpage/')
+				# return HttpResponse(name)
+			else:
+				return HttpResponse("Can't log in, please check your account or password!")
 	return render(request,'loginpage.html')
 
 def logout(request):

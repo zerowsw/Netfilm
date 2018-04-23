@@ -33,6 +33,7 @@ urlpatterns = [
     path('searchpage/',app.searchpage),
     path('chat/', app.chat),
     path('movieinfo/', app.movieinfo),
+    path('getmovieinfo/', app.get_movie_info),
     path('makecomment/', app.make_comment),
     path('getmoviecomment/', app.get_movie_comment),
     path('userprofile/', app.userprofile),
