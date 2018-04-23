@@ -37,7 +37,8 @@ urlpatterns = [
     path('makecomment/', app.make_comment),
     path('getmoviecomment/', app.get_movie_comment),
     path('userprofile/', app.userprofile),
-    path('searchuser/', app.search_user)
+    path('searchuser/', app.search_user),
+    path('echo', app.echo),
 
     # change_pw
     # path('chat/',chat.urls),

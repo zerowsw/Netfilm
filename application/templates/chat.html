@@ -7,6 +7,40 @@
     <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/chat.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">//<![CDATA[
+    $(function () {
+        //创建WebSocket对象获得连接
+
+            if(window.websocket){
+                window.websocket.close()
+            }
+            var websocket = new WebSocket("ws://" + window.location.host + "/echo");
+            websocket.onopen = function () {
+                console.log('WebSocket open');
+            };
+            websocket.onmessage = function (responseData) {
+                console.log('message: ' + responseData.data);//浏览器控制台打印返回的数据
+                var jsondata = eval('(' + responseData.data + ')'); //将返回的数据转换为json对象d
+                $('#show_message').append('<p>' + jsondata.name + '</p>'); //展示数据
+            };
+            window.websocket = websocket;
+
+
+        //发送消息
+        $('#send_message').click(function () {
+            if(!window.websocket){
+                alert("Please connect server.");
+            }else{
+{#                window.s.send($('#message').val());#} //发送字符串数据类型
+                window.websocket.send(JSON.stringify({"name":$('#message').val()}));//发送json数据类型
+            }
+        });
+
+    });
+    //]]></script>
+
+
 </head>
 <body id="chat">
     <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar" style="background-color: black">
@@ -49,10 +83,10 @@
                 <div id="input_message" class="box">
                     <div class="field has-addons">
                         <div id="input_message" class="control">
-                            <input class="input is-hovered" type="text" placeholder="massage input">
+                            <input id="message" class="input is-hovered" type="text" placeholder="massage input">
                         </div>
                         <div class="control">
-                            <button class="button is-dark has-text-white">Send</button>
+                            <button id="send_message" class="button is-dark has-text-white">Send</button>
                         </div>
                     </div>   
                 </div>

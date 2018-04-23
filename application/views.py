@@ -5,6 +5,7 @@ from django.core import serializers
 # Create your views here.
 from django.http import HttpResponseRedirect
 from application.models import *
+from dwebsocket.decorators import accept_websocket
 
 
 
@@ -21,6 +22,27 @@ def index(request):				#done
 #chat page
 def chat(request):
 	return render(request,'chat.html')
+
+
+clients = []
+@accept_websocket
+def echo(request):
+    if request.is_websocket:
+        try:
+            clients.append(request.websocket)
+            for message in request.websocket:
+                print(message)
+                me=eval(message)#将字符串类型的消息转换为字典型
+                print(type(me))
+                print(me["name"])
+                if not message:
+                    break
+                for client in clients:
+                    print(client)
+                    client.send(message)
+        finally:
+            clients.remove(request.websocket)
+
 
 def loginpage(request):
 
