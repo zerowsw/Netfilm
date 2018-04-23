@@ -82,7 +82,8 @@ def recommend_movie(request):
 		return JsonResponse(good_sample_movie, safe = False)
 	else:
 		return HttpResponse("no recommendations yet!")
-	pass
+
+
 
 def get_movie_comment(request):
 	title = request.GET.get("title", "")
@@ -258,3 +259,5 @@ def search_user(request):
 			return HttpResponse("no search results")
 	else:
 		return HttpResponse("invalid input")
+
+
