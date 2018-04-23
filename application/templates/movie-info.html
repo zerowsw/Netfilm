@@ -141,7 +141,14 @@
                         for(let i=0 ; i<response.length; i++) {
                             commentID = 'Comment '+ i +': '
                             comment = response[i]['content']
-                            $("#content").append($("<h3 class='abc'>" + commentID + comment + "</h3>"))
+                            $("#content").append($("<div class='abc' style='position: relative;\n" +
+                                "  width: 1000px;\n" +
+                                "  height: auto;\n" +
+                                "  margin: 20px 10px;\n" +
+                                "  padding: 5px;\n" +
+                                "  background-color: ;\n" +
+                                "  border-radius: 3px;\n" +
+                                "  border: 5px solid #ccc;'>" + "<h6>" + commentID + "</h6>"+ "<h3>" + comment + "</h3>" + "</div>"))
                         }
                       });
                    });
