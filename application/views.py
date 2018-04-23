@@ -43,6 +43,9 @@ def movieinfo(request):
 def userprofile(request):
 	return render(request,'userprofile.html')
 
+def recommendpage(request):
+	return render(request,'recommend.html')
+
 #movie
 def search_movie(request):
 	title = request.GET.get("title", "")
@@ -76,7 +79,7 @@ def recommend_movie(request):
 	sample_movie = rd.sample(all_movie,sample_size)
 	good_sample_movie = [sample_movie[i] for i in range(0,sample_size) if sample_movie[i]['vote_average']>threshold]
 	if(len(good_sample_movie)):
-		return JsonResponse(comments, safe = False)
+		return JsonResponse(good_sample_movie, safe = False)
 	else:
 		return HttpResponse("no recommendations yet!")
 	pass
