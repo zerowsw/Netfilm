@@ -57,58 +57,89 @@
           <div class="col-md-12">
             <h2 class="display-4 border-bottom probootstrap-section-heading">Our Recommendation</h2>
           </div>
+            <a id = "recommend" href="#recommend-result" role="button" class="btn btn-primary p-3
+            mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Get Recommendation</a>
+            <script type="text/javascript">
+
+              $("#recommend").click(()=>{
+                  let url = "http://127.0.0.1:8000/recommendmovie/";
+                  $.get(url,(response)=>{
+
+                      console.log(response)
+                      let info = ''
+                      for(let i=0 ; i<response.length; i++) {
+                          console.log(response[i]['title'])
+                          info = "Title: " + response[i]['title'] + " | Date: " + response[i]['release_date'] + " | Vote: " + response[i]['vote_average']
+                          let id = "recommendResult" + i
+                          //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
+                          document.getElementById(id).innerHTML = info;
+                      }
+                  });
+               });
+
+             </script>
+        </div>
+
+
+
+     <section class="probootstrap_section" id="section-search-result">
+      <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+          <div class="col-md-12">
+            <h2 class="display-5 border-bottom probootstrap-section-heading">Search Result</h2>
+          </div>
         </div>
         <div class="row">
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="{% static 'assets/images/black panther.jpg' %}" alt="Free Template by ProBootstrap.com" class="img-fluid">
               <div class="probootstrap-text">
-                <h3>Movie1</h3>
+                <h5 id='recommendResult0'>Movie1</h5>
               </div>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="http://www.joblo.com/posters/images/full/logan-poster-3.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h3>Movie2</h3>
+              <h5 id='recommendResult1'>Movie2</h5>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="https://static.posters.cz/image/1300/8602.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h3>Movie3</h3>
+              <h5 id='recommendResult2'>Movie3</h5>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="https://orig00.deviantart.net/ef20/f/2015/296/3/5/spectre_movie_poster_by_tldesignn-d9e2kmf.png" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h3>Movie4</h3>
+              <h5 id='recommendResult3'>Movie4</h5>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="https://static.posters.cz/image/1300/8888.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
               <div class="probootstrap-text">
-                <h3>Movie5</h3>
+                <h5 id='recommendResult4'>Movie5</h5>
               </div>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="https://static.posters.cz/image/1300/6666.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h3>Movie6</h3>
+              <h5 id='recommendResult5'>Movie6</h5>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="https://static.posters.cz/image/1300/8607.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h3>Movie7</h3>
+              <h5 id='recommendResult6'>Movie7</h5>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
               <img src="https://static.posters.cz/image/1300/8207.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h3>Movie8</h3>
+              <h5 id='recommendResult7'>Movie8</h5>
             </a>
           </div>
         </div>
