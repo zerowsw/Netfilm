@@ -76,47 +76,49 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3" style="margin: 0 auto; ">
             <a href="" class="probootstrap-thumbnail">
-              <img src="https://robohash.org/6"  class="img-fluid">
+              <img style="resize: width:600px; height:400px;" src="https://i.annihil.us/u/prod/marvel/i/mg/6/50/521f70b81f7d3/portrait_incredible.jpg"  class="img-fluid">
               <div class="probootstrap-text">
-                <h3>Movie</h3>
+                <h3>The Avengers</h3>
               </div>
             </a>
           </div>
-          <div class="col-md-12">
+{#          <div class="col-md-12">#}
 {#            <label for="fullname">Movie Comment</label>#}
 {#            <input type="text" id="movieComment" class="form-control">#}
-            <input type="text" id="input1">
-            <a id = "getMovieInfo" href="#" role="button" class="btn btn-primary">Get Info</a>
-
-              <script type="text/javascript">
-
-                  $("#getMovieInfo").click(()=>{
-                      let data = { "title" : document.getElementById('input1').value};
-                      let url = "http://127.0.0.1:8000/getmovieinfo/";
-                      $.get(url,data,(response)=>{
-
-                      let info = ''
-                      console.log(response[0]['title'])
-                      info = "Title: " +response[0]['title'] + " | Date: " + response[0]['release_date'] + " | Vote: " + response[0]['vote_average']
-                      let id = "searchResult"
-                      //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
-                      //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
-                      document.getElementById(id).innerHTML = info;
-                      console.log(response)
-
-
-                      });
-                   });
-              </script>
-          </div>
-        </div>
+{#            <input type="text" id="input1">#}
+{#            <a id = "getMovieInfo" href="#" role="button" class="btn btn-primary">Get Info</a>#}
+{##}
+{#              <script type="text/javascript">#}
+{##}
+{#                  $("#getMovieInfo").click(()=>{#}
+{#                      let data = { "title" : document.getElementById('input1').value};#}
+{#                      let url = "http://127.0.0.1:8000/getmovieinfo/";#}
+{#                      $.get(url,data,(response)=>{#}
+{##}
+{#                      let info = ''#}
+{#                      console.log(response[0]['title'])#}
+{#                      info = "Title: " +response[0]['title'] + " | Date: " + response[0]['release_date'] + " | Vote: " + response[0]['vote_average']#}
+{#                      let id = "searchResult"#}
+{#                      //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']#}
+{#                      //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];#}
+{#                      document.getElementById(id).innerHTML = info;#}
+{#                      console.log(response)#}
+{##}
+{##}
+{#                      });#}
+{#                   });#}
+{#              </script>#}
+{#          </div>#}
+{#        </div>#}
       </div>
 {#    </section>   #}
   
 
 
     <div class="probootstrap-text" id="movieinfo">
-        <h3 style="text-align: center" id='searchResult'></h3>
+        <h3 style="text-align: center" id='searchResult'>Title: The Avengers</h3>
+        <h3 style="text-align: center" id='searchResult'>Date:  2012/4/25</h3>
+        <h3 style="text-align: center" id='searchResult'>Vote:  7.4</h3>
     </div>
 
 {#    <section class="probootstrap_section" id="">#}
@@ -132,23 +134,25 @@
 
                   $("#getComment").click(()=>{
                       let data = {
-                          "title" : 'The A'
+                          "title" : 'The Avengers'
                           };
                       let url = "http://127.0.0.1:8000/getmoviecomment/";
                       $.get(url,data,(response)=>{
                         $( ".abc" ).remove();
                         console.log(response)
-                        for(let i=0 ; i<response.length; i++) {
-                            let commentUSer = response[i]['name'] +': '
-                            let comment = response[i]['content']
-                            $("#content").append($("<div class='abc' style='position: relative;\n" +
-                                "  width: 1000px;\n" +
-                                "  height: auto;\n" +
-                                "  margin: 20px 10px;\n" +
-                                "  padding: 5px;\n" +
-                                "  background-color: ;\n" +
-                                "  border-radius: 5px;\n" +
-                                "  border: 1px solid black;'>" + "<h6>" + commentUSer + "</h6>"+ "<h3>" + comment + "</h3>" + "</div>"))
+                        if(response != 'no comments yet') {
+                            for (let i = 0; i < response.length; i++) {
+                                let commentUSer = response[i]['name'] + ': '
+                                let comment = response[i]['content']
+                                $("#content").append($("<div class='abc' style='position: relative;\n" +
+                                    "  width: 1000px;\n" +
+                                    "  height: auto;\n" +
+                                    "  margin: 20px 10px;\n" +
+                                    "  padding: 5px;\n" +
+                                    "  background-color: ;\n" +
+                                    "  border-radius: 5px;\n" +
+                                    "  border: 1px solid black;'>" + "<h5>" + commentUSer + "</h5>" + "<h6>" + comment + "</h6>" + "</div>"))
+                            }
                         }
                       });
                    });
@@ -179,8 +183,8 @@
 
                   $("#writeComment").click(()=>{
                       let data = {
-                          "name" : 'abc',
-                          "title" : 'The A',
+                          "name" : 'Annie',
+                          "title" : 'The Avengers',
                           "content" : document.getElementById('comment').value,
                           "timestamp" : Math.floor(Date.now() / 1000)};
                       let url = "http://127.0.0.1:8000/makecomment/";
