@@ -21,7 +21,7 @@ def index(request):				#done
 
 #chat page
 def chat(request):
-	return render(request,'chat.html', {'username' : request.session.get('username', 'wsw')})
+	return render(request,'chat.html', {'username' : request.session.get('username', 'Hongting')})
 
 
 clients = []
