@@ -35,10 +35,10 @@
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-menu">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/">Log In</a></li>
-            <li class="nav-item"><a class="nav-link" href="/">Register</a></li>
-            <li class="nav-item"><a class="nav-link" href="/">Chat</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/loginpage">Log In</a></li>
+            <li class="nav-item"><a class="nav-link" href="/registerpage">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="/chat">Chat</a></li>
             <li class="nav-item"><a class="nav-link" href="/">Contact</a></li>
           </ul>
         </div>
@@ -131,11 +131,13 @@
                                   let info = ''
                                   for(let i=0 ; i<response.length; i++){
                                     console.log(response[i]['title'])    
-                                    info = "Title: " +response[i]['title'] + " | Date: " + response[i]['release_date'] + " | Vote: " + response[i]['vote_average']
-                                    let id = "searchResult" + i 
+                                    info = "Title: " +response[i]['title'] + "<br />Date: " + response[i]['release_date'] + "<br />Vote: " + response[i]['vote_average']
+                                    let id = "searchResult" + i
+                                    let imgID = 'imgid'+ i
                                       //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
                                       //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
                                     document.getElementById(id).innerHTML = info;
+                                    {#document.getElementById(imgID).src = "https://robohash.org/"+imgID#}
                                   }  
                                 // document.getElementById(id).innerHTML = list;
 
@@ -169,54 +171,54 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="{% static 'assets/images/black panther.jpg' %}" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <img src="https://i.annihil.us/u/prod/marvel/i/mg/6/50/521f70b81f7d3/portrait_incredible.jpg" id="imgid0" alt="Free Template by ProBootstrap.com" class="img-fluid">
               <div class="probootstrap-text">
-                <h5 id='searchResult0'>Movie1</h5>
+                <h8 id='searchResult0' style="color: black">Movie1</h8>
               </div>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="http://www.joblo.com/posters/images/full/logan-poster-3.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h5 id='searchResult1'>Movie2</h5>
+              <img src="" id="imgid1" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <h8 id='searchResult1' style="color: black">Movie2</h8>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="https://static.posters.cz/image/1300/8602.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h5 id='searchResult2'>Movie3</h5>
+              <img src="" id="imgid2" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <h8 id='searchResult2' style="color: black">Movie3</h8>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="https://orig00.deviantart.net/ef20/f/2015/296/3/5/spectre_movie_poster_by_tldesignn-d9e2kmf.png" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h5 id='searchResult3'>Movie4</h5>
+              <img src="" id="imgid3" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <h8 id='searchResult3' style="color: black">Movie4</h8>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="https://static.posters.cz/image/1300/8888.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <img src="" id="imgid4" alt="Free Template by ProBootstrap.com" class="img-fluid">
               <div class="probootstrap-text">
-                <h5 id='searchResult4'>Movie5</h5>
+                <h8 id='searchResult4' style="color: black">Movie5</h8>
               </div>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="https://static.posters.cz/image/1300/6666.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h5 id='searchResult5'>Movie6</h5>
+              <img src="" id="imgid5" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <h8 id='searchResult5' style="color: black">Movie6</h8>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="https://static.posters.cz/image/1300/8607.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h5 id='searchResult6'>Movie7</h5>
+              <img src="" id="imgid6" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <h8 id='searchResult6' style="color: black">Movie7</h8>
             </a>
           </div>
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="#" class="probootstrap-thumbnail">
-              <img src="https://static.posters.cz/image/1300/8207.jpg" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h5 id='searchResult7'>Movie8</h5>
+              <img src="" id="imgid7" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <h8 id='searchResult7' style="color: black">Movie8</h8>
             </a>
           </div>
         </div>

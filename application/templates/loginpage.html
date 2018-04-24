@@ -35,9 +35,9 @@
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-menu">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/">Register</a></li>
-            <li class="nav-item"><a class="nav-link" href="/">Chat</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/registerpage/">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="/chat">Chat</a></li>
             <li class="nav-item"><a class="nav-link" href="/">Contact</a></li>
           </ul>
         </div>
@@ -105,20 +105,20 @@
                           <div class="col-md-12">
 
                             <!-- <input type="submit" class="btn btn-primary btn-block" value="Search" > -->
-                            <a id="Login" href="" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Log In</a>
-                            <script type="text/javascript">
-
-                              $("#Login").click(()=>{
-                                let data = {
-                                  "email" : document.getElementById('loginEmail').value,
-                                  "pw" : document.getElementById('loginPassword').value
-                                };
-                                let url = "http://127.0.0.1:8000/login/";
-                                $.get(url,data,(response)=>{
-                                  alert(response);
-                                });
-                              });
-                            </script>
+                            <a id="Login" href="searchpage/" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-5">Log In</a>
+{#                            <script type="text/javascript">#}
+{##}
+{#                              $("#Login").click(()=>{#}
+{#                                let data = {#}
+{#                                  "email" : document.getElementById('loginEmail').value,#}
+{#                                  "pw" : document.getElementById('loginPassword').value#}
+{#                                };#}
+{#                                let url = "http://127.0.0.1:8000/login/";#}
+{#                                $.get(url,data,(response)=>{#}
+{#                                  alert(response);#}
+{#                                });#}
+{#                              });#}
+{#                            </script>#}
                           </div>
                         </div>
                       </form> 

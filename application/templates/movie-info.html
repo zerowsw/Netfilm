@@ -139,8 +139,8 @@
                         $( ".abc" ).remove();
                         console.log(response)
                         for(let i=0 ; i<response.length; i++) {
-                            commentID = 'Comment '+ i +': '
-                            comment = response[i]['content']
+                            let commentUSer = response[i]['name'] +': '
+                            let comment = response[i]['content']
                             $("#content").append($("<div class='abc' style='position: relative;\n" +
                                 "  width: 1000px;\n" +
                                 "  height: auto;\n" +
@@ -148,7 +148,7 @@
                                 "  padding: 5px;\n" +
                                 "  background-color: ;\n" +
                                 "  border-radius: 5px;\n" +
-                                "  border: 5px dashed black;'>" + "<h6>" + commentID + "</h6>"+ "<h3>" + comment + "</h3>" + "</div>"))
+                                "  border: 1px solid black;'>" + "<h6>" + commentUSer + "</h6>"+ "<h3>" + comment + "</h3>" + "</div>"))
                         }
                       });
                    });
