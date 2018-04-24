@@ -148,14 +148,11 @@ def register(request):
 		all_users = user.objects.all()
 		user_id_set = [all_users[i].user_id for i in range(0,len(all_users))]
 		new_id = max(user_id_set) + 1
-		
-		try:
+
 			# user.objects.create(user_id = new_id,name=name, email = email, pw = pw) #,userid=userid?????????????????
 			# u = user(user_id = new_id,name=name, email = email, pw = pw)
 			# u.save()
-			user.objects.get_or_create(user_id = new_id,name=name, email = email, pw = pw)
-		except ConnectionAbortedError:
-			return HttpResponse("???")
+		user.objects.get_or_create(user_id = new_id,name=name, email = email, pw = pw)
 		return HttpResponse("success, newid  is %d"%(new_id))
 		# return HttpResponse("success, Userid is",user.objects.filter(name=name)[0].user_id)
 		# return HttpResponse("success, Userid is",100)

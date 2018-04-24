@@ -209,13 +209,13 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 probootstrap-animate mb-3" style="margin: 0 auto; ">
             <a href="" class="probootstrap-thumbnail">
-              <img src="https://robohash.org/6" alt="" class="img-fluid">
+              <img src="https://www.infrascan.net/demo/assets/img/avatar5.png" alt="" class="img-fluid">
 {#              <div class="probootstrap-text">#}
 {#                <h3>Movie1</h3>#}
 {#              </div>#}
             </a>
-              <h5 style="text-align: center">Peter</h5>
-              <h5 style="text-align: center">peter@123.com</h5>
+              <h5 style="text-align: center">Hongting</h5>
+              <h5 style="text-align: center">hl25@illinois.edu</h5>
           </div>
 
         </div>
@@ -237,7 +237,7 @@
 
                   $("#getFriends").click(()=>{
                       let data = {
-                          "name" : 'abc'
+                          "name" : 'Hongting'
                           };
                       let url = "http://127.0.0.1:8000/getfriendlist/";
                       $.get(url,data,(response)=>{
@@ -245,7 +245,7 @@
                         console.log(response)
                         if(response != 'you have no friends!') {
                             for (let i = 0; i < response.length; i++) {
-                                let friend = response[i]['name']
+                                let friend = response[i]['name2']
                                 $("#friendlist").append($("<div class='abc' style='position: relative;\n" +
                                     "  width: 1000px;\n" +
                                     "  height: auto;\n" +
@@ -297,8 +297,8 @@
                                 console.log(response)
                                 if(response != 'you have no friends!') {
                                     for (let i = 0; i < response.length; i++) {
-                                        let friendname = " name: " + response[i]['name']
-                                        let friendemail = " email: " + response[i]['email']
+                                        let friendname = response[i]['name']
+                                        let friendemail = response[i]['email']
                                         $("#friendsearchresult").append($("<div class='aaa' style='position: relative;\n" +
                                             "  width: 520px;\n" +
                                             "  height: auto;\n" +
@@ -306,10 +306,23 @@
                                             "  padding: 5px;\n" +
                                             "  background-color: ;\n" +
                                             "  border-radius: 5px;\n" +
-                                            "  border: 1px solid black;'>" + "<h3 id='userName'>" + friendname + "</h3>" +
+                                            "  border: 1px solid black;'>" + "<h5>name:</h5>"+"<h3 id='userName'>" + friendname + "</h3>" +
+                                            "<h5>email:</h5>"+
                                             "<h3>" + friendemail + "</h3>" +
                                             "<button type='submit' class='addbtn' id ='addfriend'>" + 'Add'+ "</button>"
                                             + "</div>"))
+                                        $("#addfriend").click(()=>{
+                                            let data = {
+                                                "name1": "abc",
+                                                "name2": document.getElementById('userName').innerHTML
+                                            };
+                                            let url = "http://127.0.0.1:8000/addfriend/";
+                                            $.get(url,data,(response)=>{
+                                                console.log(document.getElementById('userName').innerHTML)
+                                                alert(response);
+                                            });
+
+                            });
                                     }
                                 }
                                 console.log(document.getElementById('addfriend').innerHTML)
