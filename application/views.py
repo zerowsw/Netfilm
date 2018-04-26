@@ -286,7 +286,16 @@ def get_follower_comments(request):
 	if name:
 		followers = list(friendship.objects.filter(name1=name).values())
 		import sqlite3
+		conn = sqlite3.connect('db.sqlite3')
+		c = conn.cursor()
+		res = c.execute("select * from application_user;")
+		# res = c.execute("create table haha(date text, month text);")
 
+		conn.commit()
+		# conn.close()
+		# res = c.execute("show tables;")
+		
+		return HttpResponse(res)
 	else:
 		return HttpResponse("invalid input")
 
