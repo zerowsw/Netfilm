@@ -286,7 +286,24 @@ def get_follower_comments(request):
 	if name:
 		followers = list(friendship.objects.filter(name1=name).values())
 		import sqlite3
-
+		conn = sqlite3.connect('db.sqlite3')
+		c = conn.cursor()
+		followers_comments = list(c.execute(
+		    							'''	select *
+										from application_friendship as friend, application_comment as comment
+										where friend.name2 = comment.name
+									    '''))
+		# followers_comments = list(c.execute(
+		#     							'''	select *
+		# 								from application_comment as comment
+		# 							    '''))
+		conn.commit()
+		# conn.close()
+		# res = c.execute("show tables;")
+		if len(followers_comments):
+			return HttpResponse(followers_comments)
+		else:
+			return HttpResponse("No Activities")
 	else:
 		return HttpResponse("invalid input")
 
