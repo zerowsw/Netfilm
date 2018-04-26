@@ -118,7 +118,7 @@ def recommend_movie(request):
 			movie_audience_dict[movie_id].add(user_id)
 
 	for movie_id in movie_audience_dict:
-		
+
 
 
 	import random as rd
@@ -321,6 +321,8 @@ def get_follower_comments(request):
 										where friend.name2 = comment.name
 									    '''))
 		followers_comments.sort()
+
+		
 		# res = c.execute("create table haha(date text, month text);")
 
 		conn.commit()
@@ -328,7 +330,7 @@ def get_follower_comments(request):
 		# res = c.execute("show tables;")
 		
 		if len(followers_comments):
-			return HttpResponse(followers_comments)
+			return JsonResponse(followers_comments, safe = False)
 		else:
 			return HttpResponse("No Activities")
 	else:
