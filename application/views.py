@@ -52,8 +52,8 @@ def registerpage(request):
 	return render(request,'registerpage.html')
 
 def searchpage(request):
-	name = request.session['user_name']
-	return render(request, 'searchpage.html',context={'name':name})
+	# name = request.session['user_name']
+	return render(request, 'searchpage.html')
 	# if request.method == 'POST':
 	# 	return render(request, 'searchpage.html')
 	# else:
