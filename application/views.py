@@ -236,7 +236,7 @@ def make_comment(request):
 		return HttpResponse("invalid input")	
 
 #user-social
-def add_friend(request):
+def add_follower(request):
 	name1 = request.GET.get("name1", "")
 	name2 = request.GET.get("name2", "")
 	if name1 and name2:
@@ -246,7 +246,7 @@ def add_friend(request):
 		return HttpResponse("false")
 
 
-def get_friend_list(request):
+def get_follower_list(request):
 	name = request.GET.get("name", "")
 	if name:
 		friends=list(friendship.objects.filter(name1=name).values())
@@ -280,4 +280,13 @@ def search_user(request):
 	else:
 		return HttpResponse("invalid input")
 
+
+def get_follower_comments(request):
+	name = request.GET.get("name", "")
+	if name:
+		followers = list(friendship.objects.filter(name1=name).values())
+		import sqlite3
+
+	else:
+		return HttpResponse("invalid input")
 
