@@ -256,7 +256,7 @@
         <div class="row">
           <div class="col-md-12">
 
-            <a id = "getFriends" href="#" role="button" class="btn btn-primary">Show All Friends</a>
+            <a id = "getFriends" href="" role="button" class="btn btn-primary">Show All Followings</a>
 
               <script type="text/javascript">
 
@@ -281,7 +281,7 @@
                                     "  background-color: ;\n" +
                                     "  border-radius: 5px;\n" +
                                     "  border: 1px solid black;'>" + "<h3 id="+ fid+ " >" + friend + "</h3>" +
-                                    "<a id =" + deleteID +  " href=\"\" role=\"button\" class=\"btn btn-primary\">" + 'Delete'+ "</a>" +
+                                    "<a id =" + deleteID +  " href=\"\" role=\"button\" class=\"btn btn-primary\">" + 'Remove'+ "</a>" +
                                     "</div>"))
 
                                 $("#" + deleteID).click(()=>{
@@ -310,14 +310,14 @@
       </div>
 
 
-     <section class="probootstrap_section" id="">
+{#     <section class="probootstrap_section" id="">#}
       <div class="container">
         <div class="row text-center mb-5 probootstrap-animate">
         </div>
         <div class="row">
           <div class="col-md-12">
             <a id = "AddFriends" href="#" role="button" class="btn btn-primary"
-            onclick="document.getElementById('id03').style.display='block'"> + Add New Friends</a>
+            onclick="document.getElementById('id03').style.display='block'"> + Add New Followings</a>
           </div>
         </div>
       </div>
@@ -354,8 +354,8 @@
                                             "  border-radius: 5px;\n" +
                                             "  border: 1px solid black;'>" + "<h5>name:</h5>"+"<h3 id='userName'>" + friendname + "</h3>" +
                                             "<h5>email:</h5>"+
-                                            "<h3>" + friendemail + "</h3>" +
-                                            "<button type='submit' class='addbtn' id ='addfriend'>" + 'Add'+ "</button>"
+                                            "<h3 id='userEmail'>" + friendemail + "</h3>" +
+                                            "<button type='submit' class='addbtn' id ='addfriend'>" + 'Follow'+ "</button>"
                                             + "</div>"))
                                         $("#addfriend").click(()=>{
                                             let data = {
@@ -367,13 +367,13 @@
                                                 console.log(document.getElementById('userName').innerHTML)
                                                 alert(response);
                                             });
-
+                                            return false
                                         });
                                     }
                                 }
                                 console.log(document.getElementById('addfriend').innerHTML)
                               });
-
+                              return false
                            });
                 </script>
 

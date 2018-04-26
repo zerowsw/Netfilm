@@ -241,7 +241,7 @@ def add_follower(request):
 	name2 = request.GET.get("name2", "")
 	if name1 and name2:
 		friendship.objects.create(name1=name1, name2=name2)
-		return HttpResponse("Added!")
+		return HttpResponse("Followed!")
 	else:
 		return HttpResponse("false")
 
