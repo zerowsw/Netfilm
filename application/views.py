@@ -94,6 +94,27 @@ def recommend_movie(request):
 	# this part for mapreduce
 	user_name = request.GET.get("name", "")
 
+	import sqlite3
+	conn = sqlite3.connect('db.sqlite3')
+	c = conn.cursor()
+	# c.execute('''
+	# 	select 
+	# 	from rate, movie
+	# 	where rate.movie_id = movie.movie_id
+
+	# 	''')
+	rate_data = list(c.execute("select * from application_rate"))
+	
+	movie_audience_dict = {}
+	for instance in rate_data:
+		# instance in format 41084(id)|294()|36401(movie_id)|4.0(rate)|1138983041(timestamp)
+		# instance[0]:id  instance[1]:user_id  instance[2]:movie_id  
+		movie_id = instance[2]
+		movie_audience_dict[movie_id] = 
+
+
+
+
 	import random as rd
 	all_movie = list(movie.objects.all().values())
 	sample_size = 1000
@@ -289,10 +310,11 @@ def get_follower_comments(request):
 		conn = sqlite3.connect('db.sqlite3')
 		c = conn.cursor()
 		followers_comments = list(c.execute(
-		    							'''	select *
+		    							'''	select comment.id,friend.name2, comment.title,comment.content,comment.timestamp
 										from application_friendship as friend, application_comment as comment
 										where friend.name2 = comment.name
 									    '''))
+		followers_comments.sort()
 		# res = c.execute("create table haha(date text, month text);")
 
 		conn.commit()
