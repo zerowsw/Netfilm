@@ -119,8 +119,6 @@ def recommend_movie(request):
 	for movie_id in movie_audience_dict:
 		pass
 
-	
-	
 	import sqlite3
 	import numpy as np
 	import random as rd
