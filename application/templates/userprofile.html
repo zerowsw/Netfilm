@@ -249,134 +249,155 @@
       </div>
 
 
-{#      <div class="container">#}
-{#        <div class="row text-center mb-5 probootstrap-animate">#}
-{#        </div>#}
-{##}
-{#        <div class="row">#}
-{#          <div class="col-md-12">#}
-{##}
-{#            <a id = "getFriends" href="#" role="button" class="btn btn-primary">Show All Friends</a>#}
-{##}
-{#              <script type="text/javascript">#}
-{##}
-{#                  $("#getFriends").click(()=>{#}
-{#                      let data = {#}
-{#                          "name" : 'Hongting'#}
-{#                          };#}
-{#                      let url = "http://127.0.0.1:8000/getfriendlist/";#}
-{#                      $.get(url,data,(response)=>{#}
-{#                        $( ".abc" ).remove();#}
-{#                        console.log(response)#}
-{#                        if(response != 'you have no friends!') {#}
-{#                            for (let i = 0; i < response.length; i++) {#}
-{#                                let friend = response[i]['name2']#}
-{#                                $("#friendlist").append($("<div class='abc' style='position: relative;\n" +#}
-{#                                    "  width: 1000px;\n" +#}
-{#                                    "  height: auto;\n" +#}
-{#                                    "  margin: 20px 10px;\n" +#}
-{#                                    "  padding: 5px;\n" +#}
-{#                                    "  background-color: ;\n" +#}
-{#                                    "  border-radius: 5px;\n" +#}
-{#                                    "  border: 1px solid black;'>" + "<h3>" + friend + "</h3>" + "</div>"))#}
-{#                            }#}
-{#                        }#}
-{#                      });#}
-{#                   });#}
-{#              </script>#}
-{#          </div>#}
-{#            <div style="text-align: left" id="friendlist"></div>#}
-{#        </div>#}
-{#      </div>#}
-{##}
-{##}
-{#     <section class="probootstrap_section" id="">#}
-{#      <div class="container">#}
-{#        <div class="row text-center mb-5 probootstrap-animate">#}
-{#        </div>#}
-{#        <div class="row">#}
-{#          <div class="col-md-12">#}
-{#            <a id = "AddFriends" href="#" role="button" class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'"> + Add New Friends</a>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{##}
-{#     <section class="probootstrap_section">#}
-{#        <div id="id03" class="modal">#}
-{##}
-{#          <form class="modal-content" >#}
-{#           <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>#}
-{#            <div class="container" style="background: #3BC0C7;" >#}
-{#              <div class="top">#}
-{#                <h2 style="color: black;">Search Users</h2>#}
-{#              </div>#}
-{#                <input type="text" id="input1" class="form-control" placeholder="Search user's name or email">#}
-{#                <button id = "searchfriend" href="#" >Search User</button>#}
-{#                <script type="text/javascript">#}
-{##}
-{#                          $("#searchfriend").click(()=>{#}
-{#                              let data = { "target" : document.getElementById('input1').value};#}
-{#                              let url = "http://127.0.0.1:8000/searchuser/";#}
-{#                              $.get(url,data,(response)=>{#}
-{#                                $( ".aaa" ).remove();#}
-{#                                console.log(response)#}
-{#                                if(response != 'you have no friends!') {#}
-{#                                    for (let i = 0; i < response.length; i++) {#}
-{#                                        let friendname = response[i]['name']#}
-{#                                        let friendemail = response[i]['email']#}
-{#                                        $("#friendsearchresult").append($("<div class='aaa' style='position: relative;\n" +#}
-{#                                            "  width: 520px;\n" +#}
-{#                                            "  height: auto;\n" +#}
-{#                                            "  margin: 20px 10px;\n" +#}
-{#                                            "  padding: 5px;\n" +#}
-{#                                            "  background-color: ;\n" +#}
-{#                                            "  border-radius: 5px;\n" +#}
-{#                                            "  border: 1px solid black;'>" + "<h5>name:</h5>"+"<h3 id='userName'>" + friendname + "</h3>" +#}
-{#                                            "<h5>email:</h5>"+#}
-{#                                            "<h3>" + friendemail + "</h3>" +#}
-{#                                            "<button type='submit' class='addbtn' id ='addfriend'>" + 'Add'+ "</button>"#}
-{#                                            + "</div>"))#}
-{#                                        $("#addfriend").click(()=>{#}
-{#                                            let data = {#}
-{#                                                "name1": "abc",#}
-{#                                                "name2": document.getElementById('userName').innerHTML#}
-{#                                            };#}
-{#                                            let url = "http://127.0.0.1:8000/addfriend/";#}
-{#                                            $.get(url,data,(response)=>{#}
-{#                                                console.log(document.getElementById('userName').innerHTML)#}
-{#                                                alert(response);#}
-{#                                            });#}
-{##}
-{#                            });#}
-{#                                    }#}
-{#                                }#}
-{#                                console.log(document.getElementById('addfriend').innerHTML)#}
-{#                              });#}
-{##}
-{#                           });#}
-{#                </script>#}
-{##}
-{#                <script type="text/javascript">#}
-{##}
-{#                    $("#addfriend").click(()=>{#}
-{#                                let data = {#}
-{#                                    "name1": "1",#}
-{#                                    "name2": document.getElementById('userName').innerHTML#}
-{#                                };#}
-{#                                let url = "http://127.0.0.1:8000/addfriend/";#}
-{#                                $.get(url,data,(response)=>{#}
-{#                                    console.log(document.getElementById('userName').innerHTML)#}
-{#                                    alert(response);#}
-{#                                });#}
-{##}
-{#                            });#}
-{#                </script>#}
-{##}
-{#            <div style="text-align: left" id="friendsearchresult"></div>#}
-{#            </div>#}
-{#          </form>#}
-{#        </div>#}
-{#        </section>#}
+      <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+
+            <a id = "getFriends" href="#" role="button" class="btn btn-primary">Show All Friends</a>
+
+              <script type="text/javascript">
+
+                  $("#getFriends").click(()=>{
+                      let data = {
+                          "name" : 'Hongting'
+                          };
+                      let url = "http://127.0.0.1:8000/getfriendlist/";
+                      $.get(url,data,(response)=>{
+                        $( ".abc" ).remove();
+                        console.log(response)
+                        if(response != 'you have no friends!') {
+                            for (let i = 0; i < response.length; i++) {
+                                let friend = response[i]['name2']
+                                let fid = 'friend'+ i
+                                let deleteID = 'deletefriend'+ i
+                                $("#friendlist").append($("<div class='abc' style='position: relative;\n" +
+                                    "  width: 500px;\n" +
+                                    "  height: auto;\n" +
+                                    "  margin: 20px 10px;\n" +
+                                    "  padding: 5px;\n" +
+                                    "  background-color: ;\n" +
+                                    "  border-radius: 5px;\n" +
+                                    "  border: 1px solid black;'>" + "<h3 id="+ fid+ " >" + friend + "</h3>" +
+                                    "<a id =" + deleteID +  " href=\"\" role=\"button\" class=\"btn btn-primary\">" + 'Delete'+ "</a>" +
+                                    "</div>"))
+
+                                $("#" + deleteID).click(()=>{
+                                            let data = {
+                                                "name1": "Hongting",
+                                                "name2": document.getElementById(fid).innerHTML
+                                            };
+                                            let url = "http://127.0.0.1:8000/deletefriend/";
+                                            $.get(url,data,(response)=>{
+                                                console.log(response)
+                                                alert(response);
+                                            });
+                                        return false
+                                        });
+
+
+                            }
+                        }
+                      });
+                      return false
+                   });
+              </script>
+          </div>
+            <div style="text-align: left" id="friendlist"></div>
+        </div>
+      </div>
+
+
+     <section class="probootstrap_section" id="">
+      <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a id = "AddFriends" href="#" role="button" class="btn btn-primary"
+            onclick="document.getElementById('id03').style.display='block'"> + Add New Friends</a>
+          </div>
+        </div>
+      </div>
+
+     <section class="probootstrap_section">
+        <div id="id03" class="modal">
+
+          <form class="modal-content" >
+           <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <div class="container" style="background: #3BC0C7;" >
+              <div class="top">
+                <h2 style="color: black;">Search Users</h2>
+              </div>
+                <input type="text" id="input1" class="form-control" placeholder="Search user's name or email">
+                <button id = "searchfriend" href="" >Search User</button>
+                <script type="text/javascript">
+
+                          $("#searchfriend").click(()=>{
+                              let data = { "target" : document.getElementById('input1').value};
+                              let url = "http://127.0.0.1:8000/searchuser/";
+                              $.get(url,data,(response)=>{
+                                $( ".aaa" ).remove();
+                                console.log(response)
+                                if(response != 'you have no friends!') {
+                                    for (let i = 0; i < response.length; i++) {
+                                        let friendname = response[i]['name']
+                                        let friendemail = response[i]['email']
+                                        $("#friendsearchresult").append($("<div class='aaa' style='position: relative;\n" +
+                                            "  width: 520px;\n" +
+                                            "  height: auto;\n" +
+                                            "  margin: 20px 10px;\n" +
+                                            "  padding: 5px;\n" +
+                                            "  background-color: ;\n" +
+                                            "  border-radius: 5px;\n" +
+                                            "  border: 1px solid black;'>" + "<h5>name:</h5>"+"<h3 id='userName'>" + friendname + "</h3>" +
+                                            "<h5>email:</h5>"+
+                                            "<h3>" + friendemail + "</h3>" +
+                                            "<button type='submit' class='addbtn' id ='addfriend'>" + 'Add'+ "</button>"
+                                            + "</div>"))
+                                        $("#addfriend").click(()=>{
+                                            let data = {
+                                                "name1": "Hongting",
+                                                "name2": document.getElementById('userName').innerHTML
+                                            };
+                                            let url = "http://127.0.0.1:8000/addfriend/";
+                                            $.get(url,data,(response)=>{
+                                                console.log(document.getElementById('userName').innerHTML)
+                                                alert(response);
+                                            });
+
+                                        });
+                                    }
+                                }
+                                console.log(document.getElementById('addfriend').innerHTML)
+                              });
+
+                           });
+                </script>
+
+                <script type="text/javascript">
+
+                    $("#addfriend").click(()=>{
+                                let data = {
+                                    "name1": "1",
+                                    "name2": document.getElementById('userName').innerHTML
+                                };
+                                let url = "http://127.0.0.1:8000/addfriend/";
+                                $.get(url,data,(response)=>{
+                                    console.log(document.getElementById('userName').innerHTML)
+                                    alert(response);
+                                });
+
+                            });
+                </script>
+
+            <div style="text-align: left" id="friendsearchresult"></div>
+            </div>
+          </form>
+        </div>
+        </section>
 {##}
 {##}
 {##}

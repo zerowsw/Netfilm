@@ -40,6 +40,7 @@ urlpatterns = [
     path('searchuser/', app.search_user),
     path('getfriendlist/',app.get_friend_list),
     path('addfriend/', app.add_friend),
+    path('deletefriend/', app.deletefriend),
     path('recommendpage/',app.recommendpage),
     path('recommendmovie/', app.recommend_movie),
     path('echo', app.echo),

@@ -241,7 +241,7 @@ def add_friend(request):
 	name2 = request.GET.get("name2", "")
 	if name1 and name2:
 		friendship.objects.create(name1=name1, name2=name2)
-		return HttpResponse("true")
+		return HttpResponse("Added!")
 	else:
 		return HttpResponse("false")
 
@@ -261,7 +261,7 @@ def deletefriend(request):
 	name2 = request.GET.get("name2", "")
 	if name1 and name2:
 		friendship.objects.filter(name1=name1, name2=name2).delete()
-		return HttpResponse("true")
+		return HttpResponse("Deleted!")
 	else:
 		return HttpResponse("false")
 
