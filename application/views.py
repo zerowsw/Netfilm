@@ -288,22 +288,14 @@ def get_follower_comments(request):
 		import sqlite3
 		conn = sqlite3.connect('db.sqlite3')
 		c = conn.cursor()
-		followers_comments = list(c.execute(
-		    							'''	select *
-										from application_friendship as friend, application_comment as comment
-										where friend.name2 = comment.name
-									    '''))
-		# followers_comments = list(c.execute(
-		#     							'''	select *
-		# 								from application_comment as comment
-		# 							    '''))
+		res = c.execute("select * from application_user;")
+		# res = c.execute("create table haha(date text, month text);")
+
 		conn.commit()
 		# conn.close()
 		# res = c.execute("show tables;")
-		if len(followers_comments):
-			return HttpResponse(followers_comments)
-		else:
-			return HttpResponse("No Activities")
+		
+		return HttpResponse(res)
 	else:
 		return HttpResponse("invalid input")
 
