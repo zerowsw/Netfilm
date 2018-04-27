@@ -62,10 +62,12 @@ def searchpage(request):
 
 def movieinfo(request):
 
-    if request.method == 'POST':
-        return render(request,'movie-info.html')
-    else:
-        return render(request, 'searchpage.html')
+	if request.method == 'POST':
+		title = request.POST.get('title', "")
+
+		return render(request,'movie-info.html', {'title' : title})
+	else:
+		return render(request, 'searchpage.html')
 
 	#return render(request,'movie-info.html')
 
@@ -274,6 +276,11 @@ def login(request):
 		# 		return HttpResponse("Can't log in, please check your account or password!")
 	return render(request,'loginpage.html')
 
+
+
+
+
+
 def logout(request):
 	name = request.GET.get('name',"")
 	try:
@@ -388,7 +395,7 @@ def get_follower_comments(request):
 		c = conn.cursor()
 		# comment.id,friend.name2, comment.title,comment.content,comment.timestamp
 		followers_comments = list(c.execute(
-		    							'''	select *
+		    							'''	select comment.id,friend.name2, comment.title,comment.content,comment.timestamp
 										from application_friendship as friend, application_comment as comment
 										where friend.name2 = comment.name and friend.name1 == "%s"
 									    '''%(name)))

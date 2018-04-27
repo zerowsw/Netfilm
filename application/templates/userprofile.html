@@ -262,7 +262,7 @@
 
                   $("#getFriends").click(()=>{
                       let data = {
-                          "name" : "Jinlin"
+                          "name" : "Hongting"
                           };
                       let url = "http://127.0.0.1:8000/getfriendlist/";
                       $.get(url,data,(response)=>{
@@ -286,7 +286,7 @@
 
                                 $("#" + deleteID).click(()=>{
                                             let data = {
-                                                "name1": "Jinlin",
+                                                "name1": "Hongting",
                                                 "name2": document.getElementById(fid).innerHTML
                                             };
                                             let url = "http://127.0.0.1:8000/deletefriend/";
@@ -335,7 +335,7 @@
 
                   $("#getFollowingComments").click(()=>{
                       let data = {
-                          "name" : "Jinlin"
+                          "name" : "Hongting"
                           };
                       let url = "http://127.0.0.1:8000/getfollowingcomment/";
                       $.get(url,data,(response)=>{
@@ -408,7 +408,7 @@
                                             + "</div>"))
                                         $("#" + addID).click(()=>{
                                             let data = {
-                                                "name1": "Jinlin",
+                                                "name1": "Hongting",
                                                 "name2": document.getElementById('userName').innerHTML
                                             };
                                             let url = "http://127.0.0.1:8000/addfriend/";
@@ -430,7 +430,7 @@
 
                     $("#addfriend").click(()=>{
                                 let data = {
-                                    "name1": "Jinlin",
+                                    "name1": "Hongting",
                                     "name2": document.getElementById('userName').innerHTML
                                 };
                                 let url = "http://127.0.0.1:8000/addfriend/";

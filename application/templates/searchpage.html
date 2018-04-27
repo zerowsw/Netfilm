@@ -142,20 +142,38 @@
 
                                 if(response[0]['title'] == "The Avengers"){
                                    for(let i=0 ; i<8; i++){
-                                        info = "Title: " +response[i]['title'] + "<br />Date: " + response[i]['release_date'] + "<br />Vote: " + response[i]['vote_average']
-                                        let id = "searchResult" + i
-                                        let imgID = 'imgid'+ i
-                                        document.getElementById(id).innerHTML = info;
+                                        titleinfo = "Title: " + response[i]['title']
+                                        dateinfo = "<br />Date: " + response[i]['release_date']
+                                        voteinfo = "<br />Vote: " + response[i]['vote_average']
+                                        let titleinfoID = "titleinfo" + i
+                                        let dateinfoID = "dateinfo" + i
+                                        let voteinfoID = "voteinfo" + i
+                                        let imgID = 'imgid' + i
+
+                                        //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
+                                        //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
+                                        document.getElementById(titleinfoID).value = titleinfo;
+                                        document.getElementById(dateinfoID).innerHTML = dateinfo;
+                                        document.getElementById(voteinfoID).innerHTML = voteinfo;
                                         document.getElementById(imgID).src = avengers[i]
                                    }
                                 }
 
                                 else if(response[0]['title'] == "Resident Evil"){
                                      for(let i=0 ; i<8; i++){
-                                        info = "Title: " +response[i]['title'] + "<br />Date: " + response[i]['release_date'] + "<br />Vote: " + response[i]['vote_average']
-                                        let id = "searchResult" + i
-                                        let imgID = 'imgid'+ i
-                                        document.getElementById(id).innerHTML = info;
+                                        titleinfo = "Title: " + response[i]['title']
+                                        dateinfo = "<br />Date: " + response[i]['release_date']
+                                        voteinfo = "<br />Vote: " + response[i]['vote_average']
+                                        let titleinfoID = "titleinfo" + i
+                                        let dateinfoID = "dateinfo" + i
+                                        let voteinfoID = "voteinfo" + i
+                                        let imgID = 'imgid' + i
+
+                                        //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
+                                        //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
+                                        document.getElementById(titleinfoID).value = titleinfo;
+                                        document.getElementById(dateinfoID).innerHTML = dateinfo;
+                                        document.getElementById(voteinfoID).innerHTML = voteinfo;
                                         document.getElementById(imgID).src = residentevil[i]
                                    }
                                 }
@@ -173,7 +191,7 @@
 
                                         //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
                                         //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
-                                        document.getElementById(titleinfoID).innerHTML = titleinfo;
+                                        document.getElementById(titleinfoID).value = titleinfo;
                                         document.getElementById(dateinfoID).innerHTML = dateinfo;
                                         document.getElementById(voteinfoID).innerHTML = voteinfo;
                                         document.getElementById(imgID).src = "https://robohash.org/"+imgID
@@ -198,15 +216,43 @@
     </section>
 
 
-{#     <script type="text/javascript">#}
-{#         function submit_a(movieID) {#}
-{#             var movie = document.getElementById(movieID).innerHTML;#}
-{#             var url = "/movieinfo?";#}
-{#             url += "title=hehe";#}
-{#             window.location = url;#}
-{#         }#}
-{##}
-{#     </script>#}
+     <script type="text/javascript">
+         function formSubmit01(){
+             document.form01.submit();
+         }
+
+         function forSubmit02(){
+             document.form02.submit();
+         }
+
+         function forSubmit03(){
+             document.form03.submit();
+         }
+
+         function forSubmit04(){
+             document.form04.submit();
+         }
+
+         function forSubmit05(){
+             document.form05.submit();
+         }
+
+         function forSubmit06(){
+             document.form06.submit();
+         }
+
+         function forSubmit07(){
+             document.form07.submit();
+         }
+
+         function forSubmit08(){
+             document.form08.submit();
+         }
+     </script>
+
+
+
+
 
 
      <section class="probootstrap_section" id="section-search-result">
@@ -218,88 +264,97 @@
         </div>
         <div class="row">
 
-          <form action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a type="submit" class="probootstrap-thumbnail" >
-              <img style="resize: width:450px; height:400px;"  src="" id="imgid0" alt="" class="img-fluid">
+          <form method="POST" name='form01' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+               {% csrf_token %}
+            <a  class="probootstrap-thumbnail" >
+              <img style="resize: width:450px; height:400px;"  src="" id="imgid0" alt="" class="img-fluid" onclick="formSubmit01()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo0' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo0' name='title' value="" style="color: black"></input>
                 <h8 id='dateinfo0' style="color: black"></h8>
                 <h8 id='voteinfo0' style="color: black"></h8>
+
               </div>
             </a>
           </form>
 
-          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+          <form method="POST" name='form02' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+              {% csrf_token %}
             <a  class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="" id="imgid1" alt="" class="img-fluid">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid1" alt="" class="img-fluid" onclick="forSubmit02()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo1' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo1' name='title' value="先好好想想" style="color: black"></input>
                 <h8 id='dateinfo1' style="color: black"></h8>
                 <h8 id='voteinfo1' style="color: black"></h8>
               </div>
             </a>
           </form>
 
-          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="/movieinfo/" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="" id="imgid2" alt="" class="img-fluid">
+          <form method="POST" name='form03' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+              {% csrf_token %}
+            <a  class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid2" alt="" class="img-fluid" onclick="forSubmit03()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo2' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo2' name='title' value="heheda" style="color: black"></input>
                 <h8 id='dateinfo2' style="color: black"></h8>
                 <h8 id='voteinfo2' style="color: black"></h8>
               </div>
             </a>
           </form>
 
-          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="/movieinfo/" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="" id="imgid3" alt="" class="img-fluid">
+          <form method="POST" name='form04' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+                {% csrf_token %}
+              <a  class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid3" alt="" class="img-fluid" onclick="forSubmit04()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo3' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo3' name='title' value="aaaaa" style="color: black"></input>
                 <h8 id='dateinfo3' style="color: black"></h8>
                 <h8 id='voteinfo3' style="color: black"></h8>
               </div>
             </a>
           </form>
 
-          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="/movieinfo/" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="" id="imgid4" alt="" class="img-fluid">
+          <form method="POST" name='form05' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+                {% csrf_token %}
+            <a  class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid4" alt="" class="img-fluid" onclick="forSubmit05()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo4' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo4' name='title' value="wwwwww" style="color: black"></input>
                 <h8 id='dateinfo4' style="color: black"></h8>
                 <h8 id='voteinfo4' style="color: black"></h8>
               </div>
             </a>
           </form>
 
-          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="/movieinfo/" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="" id="imgid5" alt="" class="img-fluid">
+          <form method="POST" name='form06' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+              {% csrf_token %}
+            <a  class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid5" alt="" class="img-fluid" onclick="forSubmit06()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo5' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo5' name='title' value="" style="color: black"></input>
                 <h8 id='dateinfo5' style="color: black"></h8>
                 <h8 id='voteinfo5' style="color: black"></h8>
               </div>
             </a>
           </form>
 
-          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="/movieinfo/" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="" id="imgid6" alt="" class="img-fluid">
+          <form method="POST" name='form07' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+              {% csrf_token %}
+            <a  class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid6" alt="" class="img-fluid" onclick="forSubmit07()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo6' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo6' name='title' value="" style="color: black"></input>
                 <h8 id='dateinfo6' style="color: black"></h8>
                 <h8 id='voteinfo6' style="color: black"></h8>
               </div>
             </a>
           </form>
 
-          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="/movieinfo/" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="" id="imgid7" alt="" class="img-fluid">
+          <form method="POST" name='form08' action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+              {% csrf_token %}
+            <a  class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid7" alt="" class="img-fluid" onclick="forSubmit08()">
               <div class="probootstrap-text">
-                <h8 id='titleinfo7' style="color: black"></h8>
+                <input contenteditable="false" id='titleinfo7' name='title' value="" style="color: black"></input>
                 <h8 id='dateinfo7' style="color: black"></h8>
                 <h8 id='voteinfo7' style="color: black"></h8>
               </div>
