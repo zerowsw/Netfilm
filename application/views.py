@@ -381,15 +381,16 @@ def get_follower_comments(request):
 	name = request.GET.get("name", "")
 	# return HttpResponse(name)
 	if name:
-		followers = list(friendship.objects.filter(name1=name).values())
+		# followers = list(friendship.objects.filter(name1=name).values())
 
 		import sqlite3
 		conn = sqlite3.connect('db.sqlite3')
 		c = conn.cursor()
+		# comment.id,friend.name2, comment.title,comment.content,comment.timestamp
 		followers_comments = list(c.execute(
-		    							'''	select comment.id,friend.name2, comment.title,comment.content,comment.timestamp
+		    							'''	select *
 										from application_friendship as friend, application_comment as comment
-										where friend.name2 = comment.name and friend.name1 = %s
+										where friend.name2 = comment.name and friend.name1 == "%s"
 									    '''%(name)))
 		followers_comments.sort()
 
