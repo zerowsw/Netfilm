@@ -39,8 +39,8 @@ urlpatterns = [
     path('getmoviecomment/', app.get_movie_comment),
     path('userprofile/', app.userprofile),
     path('searchuser/', app.search_user),
-    # path('getfriendlist/',app.get_follower_list),   #tesing get_follower_list
-    path('getfriendlist/',app.get_follower_comments), #tesing get_follower_comments
+    path('getfriendlist/',app.get_follower_list),   #tesing get_follower_list
+    path('getfollowingcomment/',app.get_follower_comments), #tesing get_follower_comments
     
     path('addfriend/', app.add_follower),
     path('deletefriend/', app.deletefriend),

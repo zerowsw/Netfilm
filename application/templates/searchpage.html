@@ -29,7 +29,7 @@
   
     <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar" style="background-color: black">
       <div class="container">
-        <a class="navbar-brand" href="/">NetFilm</a>
+        <a class="navbar-brand" href="/">{{username}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
           <span><i class="ion-navicon"></i></span>
         </button>
@@ -48,22 +48,7 @@
     </nav>
     <!-- END nav -->
     
-<!-- 
-    <section class="probootstrap-cover overflow-hidden relative"  style="background-image: url('assets/images/film2.jpg');" data-stellar-background-ratio="0.5"  id="section-home">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md">
-            <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Your Personal Film Library</h2>
-            <p class="lead mb-5 probootstrap-animate">           
-            </p>
-              <a href="/" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">Start Searching</a> 
-            </p>
-        </div>
-      </div>
-    
-    </section> -->
-    <!-- END section -->  
+
 
 
     <section class="probootstrap_section" id="" style="background-image: url('http://backgroundcheckall.com/wp-content/uploads/2017/12/movie-theater-background-powerpoint-2.jpg');
@@ -130,19 +115,71 @@
                                   //console.log(movieQuery)
                                   console.log(response)
                                   console.log(movieQuery)
-                                  let info = ''
-                                  for(let i=0 ; i<response.length; i++){
-                                    console.log(response[i]['title'])    
-                                    info = "Title: " +response[i]['title'] + "<br />Date: " + response[i]['release_date'] + "<br />Vote: " + response[i]['vote_average']
-                                    let id = "searchResult" + i
-                                    let imgID = 'imgid'+ i
-                                      //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
-                                      //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
-                                    document.getElementById(id).innerHTML = info;
-                                    {#document.getElementById(imgID).src = "https://robohash.org/"+imgID#}
-                                  }  
-                                // document.getElementById(id).innerHTML = list;
 
+                                avengers = ["https://resizing.flixster.com/pjHtBUDLuy7Z0hB8IiEOSEZalAU=/206x305/v1.bTsxMTIwNzczMTtqOzE3NzI0OzEyMDA7MTUzNjsyMDQ4",
+                                "https://ia.media-imdb.com/images/M/MV5BMjY0Mzg1NDAtZmVmNC00NDIyLTk4YjEtYzU4ZTU2ZTZkMDc0L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UY268_CR2,0,182,268_AL_.jpg",
+                                "https://i.ytimg.com/vi/wmK0oqE0lKo/movieposter.jpg",
+                                "https://ia.media-imdb.com/images/M/MV5BMTQ3NjExNjY4N15BMl5BanBnXkFtZTcwNTczODkwNQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+                                "https://i.annihil.us/u/prod/marvel/i/mg/6/50/521f70b81f7d3/portrait_incredible.jpg",
+                                "https://image.tmdb.org/t/p/w300_and_h450_bestv2/2VRvIFsc7QI5nnn5YP7b7Jgx2Xr.jpg",
+                                "https://i.ytimg.com/vi/o2HUy5rxvQs/movieposter.jpg",
+                                "https://upload.wikimedia.org/wikipedia/en/thumb/c/c8/The_New_Adventures_of_the_Elusive_Avengers.jpg/250px-The_New_Adventures_of_the_Elusive_Avengers.jpg"]
+
+
+
+                                residentevil = ["https://image.tmdb.org/t/p/w300_and_h450_bestv2/5jdvEi57WBGuI5n2drG8FLAbYDp.jpg",
+                                "https://vignette.wikia.nocookie.net/residentevil/images/9/9b/Resident_Evil_Apocalypse_Poster.jpg/revision/latest?cb=20120607204301",
+                                "https://ia.media-imdb.com/images/M/MV5BNDQ0MWI3MmEtMzM0OC00Y2ViLWE4MDItMzNhNmY1ZTdjMWE2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UX182_CR0,0,182,268_AL_.jpg",
+                                "https://upload.wikimedia.org/wikipedia/en/a/a1/BioDPoster.jpg",
+                                "https://images-na.ssl-images-amazon.com/images/I/511qnZ48xiL._SY445_.jpg",
+                                "https://img03.mgo-images.com/image/thumbnail?id=1MVda8c02cc8e0c03737792ea38be51824f&ql=70&sizes=310x465",
+                                "https://upload.wikimedia.org/wikipedia/en/b/bd/BioDamnationPoster.jpg",
+                                "http://www.sonypictures.com/movies/residentevilthefinalchapter/assets/images/onesheet.jpg"]
+
+                                let info = ''
+
+
+
+                                if(response[0]['title'] == "The Avengers"){
+                                   for(let i=0 ; i<8; i++){
+                                        info = "Title: " +response[i]['title'] + "<br />Date: " + response[i]['release_date'] + "<br />Vote: " + response[i]['vote_average']
+                                        let id = "searchResult" + i
+                                        let imgID = 'imgid'+ i
+                                        document.getElementById(id).innerHTML = info;
+                                        document.getElementById(imgID).src = avengers[i]
+                                   }
+                                }
+
+                                else if(response[0]['title'] == "Resident Evil"){
+                                     for(let i=0 ; i<8; i++){
+                                        info = "Title: " +response[i]['title'] + "<br />Date: " + response[i]['release_date'] + "<br />Vote: " + response[i]['vote_average']
+                                        let id = "searchResult" + i
+                                        let imgID = 'imgid'+ i
+                                        document.getElementById(id).innerHTML = info;
+                                        document.getElementById(imgID).src = residentevil[i]
+                                   }
+                                }
+
+                                else {
+                                    for (let i = 0; i < response.length; i++) {
+                                        console.log(response[i]['title'])
+                                        titleinfo = "Title: " + response[i]['title']
+                                        dateinfo = "<br />Date: " + response[i]['release_date']
+                                        voteinfo = "<br />Vote: " + response[i]['vote_average']
+                                        let titleinfoID = "titleinfo" + i
+                                        let dateinfoID = "dateinfo" + i
+                                        let voteinfoID = "voteinfo" + i
+                                        let imgID = 'imgid' + i
+
+                                        //document.getElementById("searchResultVote").innerHTML = "Average Vote: "+response[i]['vote_average']
+                                        //document.getElementById("imageid").src="https://robohash.org/"+response[i]['id'];
+                                        document.getElementById(titleinfoID).innerHTML = titleinfo;
+                                        document.getElementById(dateinfoID).innerHTML = dateinfo;
+                                        document.getElementById(voteinfoID).innerHTML = voteinfo;
+                                        document.getElementById(imgID).src = "https://robohash.org/"+imgID
+                                    }
+
+                                }
                                   });  
                                });
 
@@ -161,6 +198,15 @@
     </section>
 
 
+{#     <script type="text/javascript">#}
+{#         function submit_a(movieID) {#}
+{#             var movie = document.getElementById(movieID).innerHTML;#}
+{#             var url = "/movieinfo?";#}
+{#             url += "title=hehe";#}
+{#             window.location = url;#}
+{#         }#}
+{##}
+{#     </script>#}
 
 
      <section class="probootstrap_section" id="section-search-result">
@@ -171,58 +217,95 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="#" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;"  src="https://resizing.flixster.com/pjHtBUDLuy7Z0hB8IiEOSEZalAU=/206x305/v1.bTsxMTIwNzczMTtqOzE3NzI0OzEyMDA7MTUzNjsyMDQ4" id="imgid0" alt="Free Template by ProBootstrap.com" class="img-fluid">
+
+          <form action="/movieinfo/" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+            <a type="submit" class="probootstrap-thumbnail" >
+              <img style="resize: width:450px; height:400px;"  src="" id="imgid0" alt="" class="img-fluid">
               <div class="probootstrap-text">
-                <h8 id='searchResult0' style="color: black">Movie1</h8>
+                <h8 id='titleinfo0' style="color: black"></h8>
+                <h8 id='dateinfo0' style="color: black"></h8>
+                <h8 id='voteinfo0' style="color: black"></h8>
               </div>
             </a>
-          </div>
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="#" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="https://ia.media-imdb.com/images/M/MV5BMjY0Mzg1NDAtZmVmNC00NDIyLTk4YjEtYzU4ZTU2ZTZkMDc0L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UY268_CR2,0,182,268_AL_.jpg" id="imgid1" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h8 id='searchResult1' style="color: black">Movie2</h8>
+          </form>
+
+          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+            <a  class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid1" alt="" class="img-fluid">
+              <div class="probootstrap-text">
+                <h8 id='titleinfo1' style="color: black"></h8>
+                <h8 id='dateinfo1' style="color: black"></h8>
+                <h8 id='voteinfo1' style="color: black"></h8>
+              </div>
             </a>
-          </div>
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="#" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="https://i.ytimg.com/vi/wmK0oqE0lKo/movieposter.jpg" id="imgid2" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h8 id='searchResult2' style="color: black">Movie3</h8>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="https://ia.media-imdb.com/images/M/MV5BMTQ3NjExNjY4N15BMl5BanBnXkFtZTcwNTczODkwNQ@@._V1_UX182_CR0,0,182,268_AL_.jpg" id="imgid3" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h8 id='searchResult3' style="color: black">Movie4</h8>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+          </form>
+
+          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
             <a href="/movieinfo/" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="https://i.annihil.us/u/prod/marvel/i/mg/6/50/521f70b81f7d3/portrait_incredible.jpg" id="imgid4" alt="Free Template by ProBootstrap.com" class="img-fluid">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid2" alt="" class="img-fluid">
               <div class="probootstrap-text">
-                <h8 id='searchResult4' style="color: black">Movie5</h8>
+                <h8 id='titleinfo2' style="color: black"></h8>
+                <h8 id='dateinfo2' style="color: black"></h8>
+                <h8 id='voteinfo2' style="color: black"></h8>
               </div>
             </a>
-          </div>
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="#" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/2VRvIFsc7QI5nnn5YP7b7Jgx2Xr.jpg" id="imgid5" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h8 id='searchResult5' style="color: black">Movie6</h8>
+          </form>
+
+          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+            <a href="/movieinfo/" class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid3" alt="" class="img-fluid">
+              <div class="probootstrap-text">
+                <h8 id='titleinfo3' style="color: black"></h8>
+                <h8 id='dateinfo3' style="color: black"></h8>
+                <h8 id='voteinfo3' style="color: black"></h8>
+              </div>
             </a>
-          </div>
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="#" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="https://i.ytimg.com/vi/o2HUy5rxvQs/movieposter.jpg" id="imgid6" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h8 id='searchResult6' style="color: black">Movie7</h8>
+          </form>
+
+          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+            <a href="/movieinfo/" class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid4" alt="" class="img-fluid">
+              <div class="probootstrap-text">
+                <h8 id='titleinfo4' style="color: black"></h8>
+                <h8 id='dateinfo4' style="color: black"></h8>
+                <h8 id='voteinfo4' style="color: black"></h8>
+              </div>
             </a>
-          </div>
-          <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
-            <a href="#" class="probootstrap-thumbnail">
-              <img style="resize: width:450px; height:400px;" src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c8/The_New_Adventures_of_the_Elusive_Avengers.jpg/250px-The_New_Adventures_of_the_Elusive_Avengers.jpg" id="imgid7" alt="Free Template by ProBootstrap.com" class="img-fluid">
-              <h8 id='searchResult7' style="color: black">Movie8</h8>
+          </form>
+
+          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+            <a href="/movieinfo/" class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid5" alt="" class="img-fluid">
+              <div class="probootstrap-text">
+                <h8 id='titleinfo5' style="color: black"></h8>
+                <h8 id='dateinfo5' style="color: black"></h8>
+                <h8 id='voteinfo5' style="color: black"></h8>
+              </div>
             </a>
-          </div>
+          </form>
+
+          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+            <a href="/movieinfo/" class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid6" alt="" class="img-fluid">
+              <div class="probootstrap-text">
+                <h8 id='titleinfo6' style="color: black"></h8>
+                <h8 id='dateinfo6' style="color: black"></h8>
+                <h8 id='voteinfo6' style="color: black"></h8>
+              </div>
+            </a>
+          </form>
+
+          <form action="" class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+            <a href="/movieinfo/" class="probootstrap-thumbnail">
+              <img style="resize: width:450px; height:400px;" src="" id="imgid7" alt="" class="img-fluid">
+              <div class="probootstrap-text">
+                <h8 id='titleinfo7' style="color: black"></h8>
+                <h8 id='dateinfo7' style="color: black"></h8>
+                <h8 id='voteinfo7' style="color: black"></h8>
+              </div>
+            </a>
+          </form>
+
         </div>
       </div>
     </section>   

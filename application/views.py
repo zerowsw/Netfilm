@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
-# Create your views here.
 from django.http import HttpResponseRedirect
 from application.models import *
 from dwebsocket.decorators import accept_websocket
 from django.utils import timezone
 import json
+import random as rd
+import sqlite3
 
 #web
 def index(request):				#done
@@ -60,10 +61,24 @@ def searchpage(request):
 	# 	return render(request,'searchpage.html')
 
 def movieinfo(request):
-	return render(request,'movie-info.html')
+
+    if request.method == 'POST':
+        return render(request,'movie-info.html')
+    else:
+        return render(request, 'searchpage.html')
+
+	#return render(request,'movie-info.html')
 
 def userprofile(request):
-	return render(request,'userprofile.html')
+    username = request.session.get('username', "Hongting")
+
+    u = user.objects.filter(name=username).values()
+    if  len(u):
+        email = u[0]["email"]
+        return render(request, 'userprofile.html', {'username' : username, 'email' : email})
+    return render(request, 'userprofile.html')
+	#return render(request,'userprofile.html')
+
 
 def recommendpage(request):
 	return render(request,'recommend.html')
@@ -91,97 +106,100 @@ def search_movie(request):
 #
 
 def recommend_movie(request):
-	# this part for mapreduce
-	user_name = request.GET.get("name", "")
-
-	import sqlite3
-	conn = sqlite3.connect('db.sqlite3')
-	c = conn.cursor()
-	# c.execute('''
-	# 	select 
-	# 	from rate, movie
-	# 	where rate.movie_id = movie.movie_id
-	# 	''')
-	rate_data = list(c.execute("select * from application_rate"))
-	
-	movie_audience_dict = {}
-	for instance in rate_data:
-		# instance in format 41084(id)|294()|36401(movie_id)|4.0(rate)|1138983041(timestamp)
-		# instance[0]:id  instance[1]:user_id  instance[2]:movie_id  
-		movie_id = instance[2]
-		user_id = instance[1]
-		if movie_id in movie_audience_dict:
-			movie_audience_dict[movie_id].add(user_id)
-		else:
-			movie_audience_dict[movie_id] = set()
-			movie_audience_dict[movie_id].add(user_id)
-
-	for movie_id in movie_audience_dict:
-		pass
-
-	import sqlite3
-	import numpy as np
-	import random as rd
-	import math
-
-	conn = sqlite3.connect('db.sqlite3')
-	c = conn.cursor()
-	# c.execute('''
-	# 	select
-	# 	from rate, movie
-	# 	where rate.movie_id = movie.movie_id
-	# 	''')
-	rate_data = list(c.execute("select * from application_rate"))
-	sample_rate_data = rd.sample(rate_data,2000)
-
-	# print(rate_data)
-
-	movie_audience_dict = {}
-	movie_proj_dict = {}
-	movie_anti_proj_dict = {}
-	for instance in sample_rate_data:
-	    # instance in format 41084(id)|294()|36401(movie_id)|4.0(rate)|1138983041(timestamp)
-	    # instance[0]:id  instance[1]:user_id  instance[2]:movie_id
-	    movie_id = instance[2]
-	    user_id = instance[1]
-
-	    if movie_id not in movie_anti_proj_dict:
-	        movie_proj_dict[len(movie_proj_dict)] = movie_id
-	        movie_anti_proj_dict[movie_id] = len(movie_anti_proj_dict)
-	        # movie_anti_proj_dict2[movie_id] = len(movie_anti_proj_dict)
-
-	    if movie_id in movie_audience_dict:
-	        movie_audience_dict[movie_id].add(user_id)
-	    else:
-	        movie_audience_dict[movie_id] = set()
-	        movie_audience_dict[movie_id].add(user_id)
-
-	print("proj",len(movie_proj_dict),movie_proj_dict)
-	print("anti_proj",len(movie_anti_proj_dict),movie_anti_proj_dict)
-	co_occur = np.zeros((len(movie_proj_dict),len(movie_proj_dict)))
-	# print(len(co_occur),co_occur)
-
-	for id1 in movie_audience_dict:
-	    for id2 in movie_audience_dict:
-	        index1 = movie_anti_proj_dict[id1]
-	        index2 = movie_anti_proj_dict[id2]
-	        co_occur[index1][index2] = co_occur[index2][index1] = len(movie_audience_dict[id1]&movie_audience_dict[id2])
-
-	np_cooccur = np.asarray(co_occur)
-	for i in range(0,np_cooccur.shape[0]):
-	    np_cooccur /= sum(np_cooccur[1])
-
-
-	import random as rd
-	all_movie = list(movie.objects.all().values())
-	sample_size = 1000
-	threshold = 8.0
-	sample_movie = rd.sample(all_movie,sample_size)
-	good_sample_movie = [sample_movie[i] for i in range(0,sample_size) if sample_movie[i]['vote_average']>threshold]
-	if(len(good_sample_movie)):
-		return JsonResponse(good_sample_movie, safe = False)
-	else:
-		return HttpResponse("no recommendations yet!")
+    pass
+#
+# 	user_name = request.GET.get("name", "")
+#
+#
+# 	conn = sqlite3.connect('db.sqlite3')
+# 	c = conn.cursor()
+# 	# c.execute('''
+# 	# 	select
+# 	# 	from rate, movie
+# 	# 	where rate.movie_id = movie.movie_id
+# 	# 	''')
+# 	rate_data = list(c.execute("select * from application_rate"))
+#
+# 	# movie_audience_dict = {}
+# 	# for instance in rate_data:
+# 	# 	# instance in format 41084(id)|294()|36401(movie_id)|4.0(rate)|1138983041(timestamp)
+# 	# 	# instance[0]:id  instance[1]:user_id  instance[2]:movie_id
+# 	# 	movie_id = instance[2]
+# 	# 	user_id = instance[1]
+# 	# 	if movie_id in movie_audience_dict:
+# 	# 		movie_audience_dict[movie_id].add(user_id)
+# 	# 	else:
+# 	# 		movie_audience_dict[movie_id] = set()
+# 	# 		movie_audience_dict[movie_id].add(user_id)
+#     #
+# 	# for movie_id in movie_audience_dict:
+# 	# 	pass
+#     #
+# 	#
+# 	#
+# 	# import sqlite3
+# 	# import numpy as np
+# 	# import random as rd
+# 	# import math
+#     #
+# 	# conn = sqlite3.connect('db.sqlite3')
+# 	# c = conn.cursor()
+# 	# # c.execute('''
+# 	# # 	select
+# 	# # 	from rate, movie
+# 	# # 	where rate.movie_id = movie.movie_id
+# 	# # 	''')
+# 	# rate_data = list(c.execute("select * from application_rate"))
+# 	# sample_rate_data = rd.sample(rate_data,2000)
+#     #
+# 	# # print(rate_data)
+#     #
+# 	# movie_audience_dict = {}
+# 	# movie_proj_dict = {}
+# 	# movie_anti_proj_dict = {}
+# 	# for instance in sample_rate_data:
+# 	#     # instance in format 41084(id)|294()|36401(movie_id)|4.0(rate)|1138983041(timestamp)
+# 	#     # instance[0]:id  instance[1]:user_id  instance[2]:movie_id
+# 	#     movie_id = instance[2]
+# 	#     user_id = instance[1]
+#     #
+# 	#     if movie_id not in movie_anti_proj_dict:
+# 	#         movie_proj_dict[len(movie_proj_dict)] = movie_id
+# 	#         movie_anti_proj_dict[movie_id] = len(movie_anti_proj_dict)
+# 	#         # movie_anti_proj_dict2[movie_id] = len(movie_anti_proj_dict)
+#     #
+# 	#     if movie_id in movie_audience_dict:
+# 	#         movie_audience_dict[movie_id].add(user_id)
+# 	#     else:
+# 	#         movie_audience_dict[movie_id] = set()
+# 	#         movie_audience_dict[movie_id].add(user_id)
+#     #
+# 	# print("proj",len(movie_proj_dict),movie_proj_dict)
+# 	# print("anti_proj",len(movie_anti_proj_dict),movie_anti_proj_dict)
+# 	# co_occur = np.zeros((len(movie_proj_dict),len(movie_proj_dict)))
+# 	# # print(len(co_occur),co_occur)
+#     #
+# 	# for id1 in movie_audience_dict:
+# 	#     for id2 in movie_audience_dict:
+# 	#         index1 = movie_anti_proj_dict[id1]
+# 	#         index2 = movie_anti_proj_dict[id2]
+# 	#         co_occur[index1][index2] = co_occur[index2][index1] = len(movie_audience_dict[id1]&movie_audience_dict[id2])
+#     #
+# 	# np_cooccur = np.asarray(co_occur)
+# 	# for i in range(0,np_cooccur.shape[0]):
+# 	#     np_cooccur /= sum(np_cooccur[1])
+#
+#
+#
+#     all_movie = list(movie.objects.all().values())
+#     sample_size = 1000
+#     threshold = 8.0
+#     sample_movie = rd.sample(all_movie,sample_size)
+#     good_sample_movie = [sample_movie[i] for i in range(0,sample_size) if sample_movie[i]['vote_average']>threshold]
+#     if(len(good_sample_movie)):
+#         return JsonResponse(good_sample_movie, safe = False)
+#     else:
+#         return HttpResponse("no recommendations yet!")
 
 
 
@@ -237,11 +255,11 @@ def register(request):
 
 def login(request):
 	if request.method == 'POST':
-		email = request.GET.get('email',"")
-		pw = request.GET.get('pw',"")
-		request.session['username'] = email
+		username = request.POST.get('username',"")
+		pw = request.POST.get('pw',"")
+		request.session['username'] = username
 		request.session['is_login'] = True
-		#return HttpResponseRedirect('/searchpage/')
+		return render(request, 'searchpage.html', {'username' : request.session.get('username', 'Hongting')});
 		# if email and pw:
 		# 	res = user.objects.filter(email = email,pw = pw)
 		# 	if res and len(res):
@@ -361,16 +379,18 @@ def search_user(request):
 
 def get_follower_comments(request):
 	name = request.GET.get("name", "")
+	# return HttpResponse(name)
 	if name:
 		followers = list(friendship.objects.filter(name1=name).values())
+
 		import sqlite3
 		conn = sqlite3.connect('db.sqlite3')
 		c = conn.cursor()
 		followers_comments = list(c.execute(
 		    							'''	select comment.id,friend.name2, comment.title,comment.content,comment.timestamp
 										from application_friendship as friend, application_comment as comment
-										where friend.name2 = comment.name
-									    '''))
+										where friend.name2 = comment.name and friend.name1 = %s
+									    '''%(name)))
 		followers_comments.sort()
 
 

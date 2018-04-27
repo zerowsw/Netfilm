@@ -234,8 +234,8 @@
         </div>
 
           <div class="" style="margin:auto; ">
-                <div style="text-align: left" id=''>Name:<h3>Hongting</h3></div>
-                <div style="text-align: left" id=''>Email:<h3>hl25@illinois.edu</h3></div>
+                <div style="text-align: left" id='username'>Name:<h3>{{username}}</h3></div>
+                <div style="text-align: left" id=''>Email:<h3>{{email}}</h3></div>
                 <div style="text-align: left" id=''>Gender:<h3>Male</h3></div>
                 <div style="text-align: left" id=''>Age:<h3>22</h3></div>
                 <div style="text-align: left" id=''>Hobby:<h3>Travel</h3></div>
@@ -262,7 +262,7 @@
 
                   $("#getFriends").click(()=>{
                       let data = {
-                          "name" : 'Hongting'
+                          "name" : "Jinlin"
                           };
                       let url = "http://127.0.0.1:8000/getfriendlist/";
                       $.get(url,data,(response)=>{
@@ -286,7 +286,7 @@
 
                                 $("#" + deleteID).click(()=>{
                                             let data = {
-                                                "name1": "Hongting",
+                                                "name1": "Jinlin",
                                                 "name2": document.getElementById(fid).innerHTML
                                             };
                                             let url = "http://127.0.0.1:8000/deletefriend/";
@@ -310,6 +310,8 @@
       </div>
 
 
+
+
 {#     <section class="probootstrap_section" id="">#}
       <div class="container">
         <div class="row text-center mb-5 probootstrap-animate">
@@ -321,6 +323,52 @@
           </div>
         </div>
       </div>
+
+
+      <div class="container">
+          <div class="row text-center mb-5 probootstrap-animate">
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a id = "getFollowingComments" href="" role="button" class="btn btn-primary">Show All Followings' Comments</a>
+              <script type="text/javascript">
+
+                  $("#getFollowingComments").click(()=>{
+                      let data = {
+                          "name" : "Jinlin"
+                          };
+                      let url = "http://127.0.0.1:8000/getfollowingcomment/";
+                      $.get(url,data,(response)=>{
+                        $( ".aaa" ).remove();
+                        console.log(response)
+                        if(response != 'No Activities') {
+                            for (let i = 0; i < response.length; i++) {
+                                let commentUSer = response[i][1];
+                                let commentMovie = response[i][2];
+                                let comment = response[i][3];
+                                let realtime = new Date();
+                                $("#commentsList").append($("<div class='aaa' style='position: relative;\n" +
+                                    "  width: 1000px;\n" +
+                                    "  height: auto;\n" +
+                                    "  margin: 20px 10px;\n" +
+                                    "  padding: 5px;\n" +
+                                    "  background-color: ;\n" +
+                                    "  border-radius: 5px;\n" +
+                                    "  border: 1px solid black;'>" + "<h5>" + commentUSer +' on "'+ commentMovie +'":'
+                                    + "</h5>" + "<h6>" + comment + "</h6>" + "<h8>" + realtime + "</h8>" + "</div>"))
+                            }
+                        }
+                      });
+                      return false;
+                   });
+              </script>
+          </div>
+            <div style="text-align: left" id="commentsList"></div>
+        </div>
+      </div>
+
+     </section>
+
 
      <section class="probootstrap_section">
         <div id="id03" class="modal">
@@ -345,6 +393,7 @@
                                     for (let i = 0; i < response.length; i++) {
                                         let friendname = response[i]['name']
                                         let friendemail = response[i]['email']
+                                        let addID = "addfriend" + i
                                         $("#friendsearchresult").append($("<div class='aaa' style='position: relative;\n" +
                                             "  width: 520px;\n" +
                                             "  height: auto;\n" +
@@ -355,11 +404,11 @@
                                             "  border: 1px solid black;'>" + "<h5>name:</h5>"+"<h3 id='userName'>" + friendname + "</h3>" +
                                             "<h5>email:</h5>"+
                                             "<h3 id='userEmail'>" + friendemail + "</h3>" +
-                                            "<button type='submit' class='addbtn' id ='addfriend'>" + 'Follow'+ "</button>"
+                                            "<button type='submit' class='addbtn' id = " + addID + ">" + 'Follow'+ "</button>"
                                             + "</div>"))
-                                        $("#addfriend").click(()=>{
+                                        $("#" + addID).click(()=>{
                                             let data = {
-                                                "name1": "Hongting",
+                                                "name1": "Jinlin",
                                                 "name2": document.getElementById('userName').innerHTML
                                             };
                                             let url = "http://127.0.0.1:8000/addfriend/";
@@ -367,7 +416,7 @@
                                                 console.log(document.getElementById('userName').innerHTML)
                                                 alert(response);
                                             });
-                                            return false
+                                            return false;
                                         });
                                     }
                                 }
@@ -381,7 +430,7 @@
 
                     $("#addfriend").click(()=>{
                                 let data = {
-                                    "name1": "1",
+                                    "name1": "Jinlin",
                                     "name2": document.getElementById('userName').innerHTML
                                 };
                                 let url = "http://127.0.0.1:8000/addfriend/";
@@ -398,8 +447,20 @@
           </form>
         </div>
         </section>
-{##}
-{##}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {##}
 {##}
 {##}
