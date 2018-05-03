@@ -257,22 +257,20 @@ def login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username',"")
 		pw = request.POST.get('pw',"")
-		request.session['username'] = username
-		request.session['is_login'] = True
-		return render(request, 'searchpage.html', {'username' : request.session.get('username', 'Hongting')});
-		# if email and pw:
-		# 	res = user.objects.filter(email = email,pw = pw)
-		# 	if res and len(res):
-		# 		name = res[0].name
-		# 		request.session['username'] = name
-		# 		request.session['is_login'] = True
-		# 		# return HttpResponse("You have successfully logged in! ")
-        #
-		# 		return HttpResponseRedirect('/searchpage/')
-		# 		# return HttpResponse(name)
-		# 	else:
-		# 		return HttpResponse("Can't log in, please check your account or password!")
-	return render(request,'loginpage.html')
+		# request.session['username'] = username
+		# request.session['is_login'] = True
+		
+		if email and pw:
+			res = user.objects.filter(email = email,pw = pw)
+			if res and len(res):
+				name = res[0].name
+				request.session['username'] = username
+				request.session['is_login'] = True
+        		return render(request, 'searchpage.html', {'username' : request.session.get('username', 'Hongting')});
+			else:
+				return HttpResponse("Can't log in, please check your account or password!")
+				
+	
 
 def logout(request):
 	name = request.GET.get('name',"")
